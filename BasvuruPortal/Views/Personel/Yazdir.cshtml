@@ -1,0 +1,109 @@
+﻿@model BasvuruPortal.Models.PersonelEmail
+@{
+    ViewBag.Title = "Yazdir";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+<section class="inner-page">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            Lütfen bu formu yazıcıdan çıktısını aldıktan sonra imzalayıp Başvuru Ekranındaki İmza Görselini Yükle Butonu ile Yükleyiniz
+        </div>
+
+        <div class="row">
+            <div class="col col-md-9">
+                <table class="table" border="1">
+                    <tr style="text-align:center">
+                        <td colspan="2">
+                            KAYSERİ ÜNİVERSİTESİ
+                            <br /> AKADEMİK VE İDARİ PERSONEL İÇİN
+                            <br />  ELEKTRONİK POSTA HESABI BAŞVURU FORMU
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru No</td>
+                        <td>@Model.ID</td>
+                    </tr>
+                    <tr>
+                        <td>Adı Soyadı</td>
+                        <td>@Model.AdiSoyadi</td>
+                    </tr>
+                    <tr>
+                        <td>T.C. Kimlik No</td>
+                        <td>@Model.TCKimlikNo</td>
+                    </tr>
+                    <tr>
+                        <td>Kurum Sicil No</td>
+                        <td>@Model.SicilNo</td>
+                    </tr>
+                    <tr>
+                        <td>Uyruğu</td>
+                        <td>@Model.uyruk</td>
+                    </tr>
+                    <tr>
+                        <td>Birimi / Bölümü</td>
+                        <td>@Model.birimi</td>
+                    </tr>
+                    <tr>
+                        <td>Cep Telefonu</td>
+                        <td>@Model.CepTelefonu</td>
+                    </tr>
+                    <tr>
+                        <td>İş Telefonu</td>
+                        <td>@Model.isTelefonu</td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru Tarihi</td>
+                        <td>@Model.BasvuruTarihi.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            Kayseri Üniversitesi Bilgisayar Ağı ve Internet kullanım Yönergesine uymayı kabul ediyorum<br />
+                            <br />  İmza :
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Kullanıcı Adı : ............................. kayseri.edu.tr</td>
+                        <td align="center" rowspan="2">
+                            Kontrol Eden  :
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Şifre         : ....................................</td>
+                    </tr>
+
+                    <tr>
+                        <td align="left" colspan="2">
+                            - Yardım için yardim@kayseri.edu.tr adresine e-posta gönderebilir veya 10200 numaralı telefonları arayabilirsiniz.
+                            <br />   - E-posta hesabınıza https://webmail.kayseri.edu.tr adresinden erişebilirsiniz.
+                            <br />   - Üniversitemiz ile ilişiğiniz kesildiğinde (emeklilik hariç) bu hesabınız kapatılacaktır.
+                        </td>
+                    </tr>
+                </table>
+                <a href="@Url.Action("PersonelEmailYazdir","Yazdir",new { Model.Guid})" rel="noopener" target="_blank" class="btn btn-success"><i class="fas fa-print"></i> Yazdır</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/Modal");}
+
+}
+@section scripts{
+    <script type="text/javascript">
+         $(function() {
+           var r = '@TempData["mesaj"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+           }
+        });
+    </script>
+}

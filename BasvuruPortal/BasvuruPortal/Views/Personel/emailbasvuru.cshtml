@@ -1,0 +1,210 @@
+﻿@model BasvuruPortal.Models.PersonelEmail
+@{
+    ViewBag.Title = "emailbasvuru";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+
+<section class="inner-page">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            Lütfen aşağıdaki alanları eksiksiz doldurunuz
+
+        </div>
+        <p style="color:red"> (*) Alanlar, Zorunlu Alanlardır </p>
+        @using (Html.BeginForm("emailbasvuru", "Personel", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.AdiSoyadi, new { @class = "form-control", @placeholder = "* Adınız Soyadınız" })
+                    @Html.ValidationMessageFor(model => model.AdiSoyadi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.TCKimlikNo, new { @class = "form-control", @placeholder = "* TC Kimlik No" })
+                    @Html.ValidationMessageFor(model => model.TCKimlikNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.uyruk, new { @class = "form-control", @placeholder = "* Uyruğunuz" })
+                    @Html.ValidationMessageFor(model => model.uyruk, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.SicilNo, new { @class = "form-control", @placeholder = "* Kurum Sicil No" })
+                    @Html.ValidationMessageFor(model => model.SicilNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.Unvan, new { @class = "form-control", @placeholder = "* Unvanınız" })
+                    @Html.ValidationMessageFor(model => model.Unvan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.DropDownListFor(x => x.statuID, null, " Lütfen Statünüzü Seçiniz *", new { @class = "form-control", @id = "drop" })
+                    @Html.ValidationMessageFor(model => model.statuID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 form-group">
+                    @Html.TextBoxFor(x => x.StatuDiger, new { @id = "diger", @class = "form-control", @placeholder = " Diğer seçiliyse doldurunuz" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.birimi, new { @class = "form-control", @placeholder = "* Biriminiz/ Bölümünüz" })
+                    @Html.ValidationMessageFor(model => model.birimi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.CepTelefonu, new { @class = "form-control", @placeholder = "* Cep Telefon Numaranız" })
+                    @Html.ValidationMessageFor(model => model.CepTelefonu, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2 form-group">
+                    Örn ( 05********* )
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.isTelefonu, new { @class = "form-control", @placeholder = " İş Telefonunuz" })
+                    @Html.ValidationMessageFor(model => model.isTelefonu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="row">
+                    <div class="col-md-4 form-group">
+                        @Html.TextBoxFor(x => x.MailAdresi, new { @class = "form-control", @placeholder = "* Kullanmak istediğiniz Mail adresi" })
+                        @Html.ValidationMessageFor(model => model.MailAdresi, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <input type="text" class="form-control" value="kayseri.edu.tr" readonly="readonly" />
+                    </div>
+                </div>*@
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.TextBoxFor(x => x.sifre, new { @id = "newPassword", @class = "form-control", @placeholder = "* Kullanmak istediğiniz Şifreyi Belirleyin", @type = "password" })
+                    @Html.ValidationMessageFor(model => model.sifre, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <ul>
+                        <li><span style="color:red" id="upper">En az bir Büyük Harf</span></li>
+                        <li><span style="color:red" id="lower">En az bir Küçük Harf</span></li>
+                        <li><span style="color:red" id="sayi">En az bir Sayı Harf</span></li>
+                        <li><span style="color:red" id="ozel">En az bir Özel Karakter</span></li>
+                        <li><span style="color:red" id="uzunluk">En az 8 Karakter </span></li>
+                    </ul>
+                </div>
+                @*<div class="col-md-8 form-group">
+                        Şifreniz minimum 8 karakterden oluşmalıdır. En az bir büyük harf, bir küçük harf, bir sayi ve (*+.?%) gibi en az bir özel karakterler yer almalı
+                    </div>*@
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+                <div class="col-md-12 col-sm-3 col-xs-3">
+
+                    <div class="bx-pull-left"> <button class="btn btn-primary" type="submit">Başvuru Yap</button></div>
+                </div>
+
+                <div class="col-md-12 col-sm-9 col-xs-9 ">
+                    <div class="bx-pull-right">
+                        <a href="/Personel/EmailFormGorseli" class="btn btn-danger">İmzalı Başvuru Formunu Yükle</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+        @*<div class="mb-3" style="visibility:hidden">
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>*@
+
+    </div>
+</section>
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/ModalError");}
+
+}
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            $('#diger').hide();
+
+            $('#drop').change(function () {
+                var selectedValue = $('#drop').val();
+                if (selectedValue == 6)
+                    $('#diger').show();
+                else
+                    $('#diger').hide();
+            });
+
+            var r = '@TempData["hata"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+           }
+
+        });
+
+        $('#newPassword').keyup(function (e) {
+
+            var upper = /^(?=.*?[A-Z])/;
+            var lower = /^(?=.*?[a-z])/;
+            var sayi = /^(?=.*?[0-9])/;
+            var ozel = /^(?=.*?[#?!$%^&*-])/;
+            var uzunluk = /^(?=.{8,})/;
+
+            if (uzunluk.test($(this).val())) {
+
+
+                document.getElementById('uzunluk').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('uzunluk').setAttribute("style", "color:red;");
+            }
+
+            if (upper.test($(this).val())) {
+
+                document.getElementById('upper').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('upper').setAttribute("style", "color:red;");
+            }
+
+            if (lower.test($(this).val())) {
+                document.getElementById('lower').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('lower').setAttribute("style", "color:red;");
+            }
+
+            if (sayi.test($(this).val())) {
+                document.getElementById('sayi').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('sayi').setAttribute("style", "color:red;");
+            }
+
+            if (ozel.test($(this).val())) {
+                document.getElementById('ozel').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('ozel').setAttribute("style", "color:red;");
+            }
+
+            return true;
+        });
+    </script>
+
+}

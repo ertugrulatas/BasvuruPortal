@@ -1,0 +1,79 @@
+﻿@model List<BasvuruPortal.Models.PersonelEmail>
+
+@{
+    ViewBag.Title = "MailOnaylananlar";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+@section cssfile{
+    @{ Html.RenderPartial("../PartialViews/DataTableCss");}
+
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Mail Onaylananlar</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr align="center">
+                                    <th>Başvuru No</th>
+                                    <th>Mail Adresi</th>
+                                    <th>Adı Soyadı</th>
+                                    <th>Statusu</th>
+                                    <th>Birimi</th>
+                                    <th>Başvuru Tarihi</th>
+                                    <th>Onaylayan</th>
+                                    <th>Onay Tarihi</th>
+                                    <th>Detay</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr align="center">
+                                        <td width="5%" align="center">@item.ID</td>
+                                        <td width="15%">@item.MailAdresi</td>
+                                        <td>@item.AdiSoyadi</td>
+                                        <td>@item.statu.status</td>
+                                        <td align="center">@item.birimi</td>
+                                        <td align="center">@item.BasvuruTarihi.ToString("dd/MM/yyyy HH.mm")</td>
+                                        <td align="center">@item.OnaylanayanKisi</td>
+                                        <td align="center">@item.OnayTarihi</td>
+                                        <td align="center"><a href="@Url.Action("MailBasvuruDetay",new { id = item.ID })"><i style="color:darkgreen" class="fas fa-edit"></i></a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr align="center">
+                                    <th>Başvuru No</th>
+                                    <th>Mail Adresi</th>
+                                    <th>Adı Soyadı</th>
+                                    <th>Statusu</th>
+                                    <th>Birimi</th>
+                                    <th>Başvuru Tarihi</th>
+                                    <th>Onaylayan</th>
+                                    <th>Onay Tarihi</th>
+                                    <th>Detay</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenID" />
+    </div>
+</section>
+
+<!-- /.card -->
+@section scripts{
+    @{ Html.RenderPartial("../PartialViews/DataTableScript");}}
+

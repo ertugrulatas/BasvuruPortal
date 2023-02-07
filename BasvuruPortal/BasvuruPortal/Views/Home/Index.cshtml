@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AnaSayfa.cshtml";
+}
+
+<section id="services" class="services">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Başvurular</h2>
+            <p>Personel</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <div class="icon">
+                        <a href="@Url.Action("emailbasvuru","Personel")">  <i class="bx bxl-dribbble"></i></a>
+                    </div>
+                    <h4><a href="@Url.Action("emailbasvuru","Personel")">E-Mail Başvuru</a></h4>
+                    <p>Personel E-Mail Online Başvuru yapmak için Tıklayınız</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                <div class="icon-box">
+                    <div class="icon"><i class="bx bx-file"></i></div>
+                    <h4><a href="@Url.Action("AracGirisKartiBasvuru","Personel")">Araç Giriş Kart Başvuru</a></h4>
+                    <p>Personel Araç Serbest Giriş Kartı Online Başvuru yapmak için Tıklayınız</p>
+                </div>
+            </div>
+
+
+        </div>
+        <br />
+
+        <div class="section-title">
+
+            <p>Öğrenci</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                    <h4><a href="">Araç Giriş Kart Başvuru</a></h4>
+                    <p>Öğrenci Araç Serbest Giriş Kartı Online Başvuru yapmak için Tıklayınız</p>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+

@@ -1,0 +1,187 @@
+﻿@model BasvuruPortal.Models.Kaysem.KaysemBasvuru
+@{
+    ViewBag.Title = "Kaysembasvurudetay";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+@section cssfile{
+    @{
+        Html.RenderPartial("../PartialViews/formCss");
+    }
+
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Başvuru Form Detay</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+
+            <div class="card-header">
+                <h3 class="card-title">Başvuruyu Yapan </h3>
+                <input type="hidden" value="@Model.ID" />
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Başvuru No :
+                        </div>
+                        <div class="form-group">
+                            Başvuru Tarihi :
+                        </div>
+                        <div class="form-group">
+                            Kurs Adı :
+                        </div>
+
+                        <div class="form-group">
+                            Cinsiyet :
+                        </div>
+
+                        <div class="form-group">
+                            Ad Soyad :
+                        </div>
+
+                        <div class="form-group">
+                            Cep Telefonu :
+                        </div>
+
+                        <div class="form-group">
+                            Mail Adresi :
+                        </div>
+
+                        <div class="form-group">
+                            Mesleği :
+                        </div>
+                        <div class="form-group">
+                            Çalıştığı Kurum :
+                        </div>
+                        <div class="form-group">
+                            Adres :
+                        </div>
+                        <div class="form-group">
+                            Mesaj :
+                        </div>
+
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.ID)
+                        </div>
+                        <div class="form-group">
+                            @Model.BasvuruTarihi.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Kurs.Kurs_Adi)
+                        </div>
+                        @if (@Model.Cinsiyet == "E")
+                        {
+                            <div class="form-group">Erkek</div>
+                        }
+                        else
+                        {
+                            <div class="form-group">Kadın</div>
+                        }
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.BasvuruAdiSoyadi)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.CepTelefonu)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.MailAdresi)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Meslek.Meslek_Adi)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.CalistigiKurum)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Adresi)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Mesaj)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Başvuru Formu </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @if (Model.Basvuru_Formu != null)
+                    {
+                        <a href="@Url.Action("DownloadBasvuruFormu","OnlineBasvuru", new {id = Model.ID })" title="PDF Aç" target="_blank">
+                            Başvuru Formunu indirmek için lütfen buraya tıklayınız.
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Banka Dekontu </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @if (Model.Dekont != null)
+                    {
+                        <a href="@Url.Action("DownloadDekont","OnlineBasvuru", new {id = Model.ID })" title="PDF Aç" target="_blank">
+                            Banka Dekonutunu indirmek için lütfen buraya tıklayınız.
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Diğer Belgeler </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    @if (Model.Diger_Belgeler != null)
+                    {
+                        <a href="@Url.Action("DownloadDigerBelgeler","OnlineBasvuru", new {id = Model.ID })" title="PDF Aç" target="_blank">
+                            Başvuruya ait diğer belgeleri indirmek için lütfen buraya tıklayınız.
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <center>
+        <a href="@Url.Action("KaysemBasvuruOnayla","OnlineBasvuru",new { Model.ID})" rel="noopener" target="_blank" class="btn btn-info"><i class="fas fa-check"></i> İncelendi</a>
+        @*<a href="@Url.Action("KaysemBasvuruYazdir","Yazdir",new { Model.Guid})" rel="noopener" target="_blank" class="btn btn-success"><i class="fas fa-print"></i> Yazdır</a>*@
+    </center>
+</section>
+
+

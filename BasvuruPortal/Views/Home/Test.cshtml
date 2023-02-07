@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+
+<input type="password" id="newPassword" />
+<br />
+<span style="color:red" id="uzunluk">En az 8 Karakter </span>
+<br />
+<span style="color:red" id="upper">En az Bir Büyük Karakter</span>
+<br />
+<span style="color:red" id="lower">En az bir küçük Karakter</span>
+<br />
+<span style="color:red" id="sayi">En az bir sayi Karakter</span>
+<br />
+<span style="color:red" id="ozel">En az bir özel Karakter</span>
+<br />
+
+@section scripts{
+
+    <script>
+
+        $('#newPassword').keyup(function (e) {
+
+            var upper = /^(?=.*?[A-Z])/;
+            var lower = /^(?=.*?[a-z])/;
+            var sayi = /^(?=.*?[0-9])/;
+            var ozel = /^(?=.*?[#?!$%^&*-])/;
+            var uzunluk = /^(?=.{8,})/;
+
+            if (uzunluk.test($(this).val())) {
+              
+
+                document.getElementById('uzunluk').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('uzunluk').setAttribute("style", "color:red;");
+            }
+
+            if (upper.test($(this).val())) {
+
+                document.getElementById('upper').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('upper').setAttribute("style", "color:red;");
+            }
+
+            if (lower.test($(this).val())) {
+                document.getElementById('lower').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('lower').setAttribute("style", "color:red;");
+            }
+
+            if (sayi.test($(this).val())) {
+                document.getElementById('sayi').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('sayi').setAttribute("style", "color:red;");
+            }
+
+            if (ozel.test($(this).val())) {
+                document.getElementById('ozel').setAttribute("style", "color:green;");
+
+            } else {
+                document.getElementById('ozel').setAttribute("style", "color:red;");
+            }
+
+            return true;
+        });
+    </script>
+
+}

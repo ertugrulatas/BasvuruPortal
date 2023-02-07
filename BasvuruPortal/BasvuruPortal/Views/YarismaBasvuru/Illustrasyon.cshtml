@@ -1,0 +1,230 @@
+﻿@model BasvuruPortal.ViewModels.IllustrasyonYarismaBasvuruViewModel
+@{
+    ViewBag.Title = "Illustrasyon Başvurusu";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+
+<section class="inner-page">
+    @using (Html.BeginForm("Illustrasyon", "YarismaBasvuru", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <div class="row">
+                    <div class="row col-md-12">
+                        <div class="col-md-2 form-group mt-3 mt-md-0">
+                            Yarışma Konusu :
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            @Html.TextBoxFor(x => x.YarismaAdi, new { @class = "form-control", @readonly = "true" })
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-2">
+                            Başlangıç Tarihi:
+                        </div>
+                        <div class="col-md-2 form-group mt-3 mt-md-0">
+                            @Html.TextBoxFor(x => x.YarismaBaslangicTarihi, new { @class = "form-control", @readonly = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            Bitiş Tarihi:
+                        </div>
+                        <div class="col-md-2 form-group mt-3 mt-md-0">
+                            @Html.TextBoxFor(x => x.YarismaBitisTarihi, new { @class = "form-control", @readonly = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.YarismaciAdi)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextBoxFor(x => x.YarismaciAdi, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.YarismaciAdi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.YarismaciSoyadi)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextBoxFor(x => x.YarismaciSoyadi, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.YarismaciSoyadi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.TCKimlikNo)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextBoxFor(x => x.TCKimlikNo, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.TCKimlikNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.YarismaciDogumTarihi)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextBoxFor(x => x.YarismaciDogumTarihi, new { @class = "form-control", @type = "date" })
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.YarismaciDogumTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.YarismaciTelefon)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextBoxFor(x => x.YarismaciTelefon, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        ( 05********* )
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.YarismaciTelefon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.YarismaciEmail)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextBoxFor(x => x.YarismaciEmail, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.YarismaciEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.Adres)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextAreaFor(x => x.Adres, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row col-md-12">
+                    <div class="col-md-2 form-group mt-3 mt-md-0">
+                        @Html.LabelFor(x => x.YarismaciProjeAciklama)
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        @Html.TextAreaFor(x => x.YarismaciProjeAciklama, new { @class = "form-control", @rows = 5 })
+                    </div>
+                    <div class="col-md-4 form-group mt-4 mt-md-0">
+                        @Html.ValidationMessageFor(model => model.YarismaciProjeAciklama, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.TextBoxFor(x => x.YarismaId, new { @class = "form-control", @type = "hidden" })
+                </div>
+                <div class="row col-md-12">
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="file" name="file" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal fade" id="onaymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Telif Hakkı ve Diğer Hususlar
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="text-align:justify">
+                            İllüstrasyonların Fikir ve Sanat Eserleri Kanunu’ndan doğan yayma, çoğaltma,
+                            temsil işlemi, dijital iletişim de dahil işaret ve görüntülü araçlarla umuma iletme hakkı sınırsız olarak Kayseri Üniversitesi Rektörlüğüne
+                            ait olup, yarışmacılar bundan telif hakkı talep etmeyeceklerdir. Ödül alan illüstrasyonlar; Kayseri Üniversitesi Rektörlüğü tarafından istenilen her yerde kullanılabilir.
+                            Yarışmacılar dereceye girmiş illüstrasyonun telif hakkını Kayseri Üniversitesi Rektörlüğüne devretmiş sayılacaktır.
+                            İllüstrasyonu başka yerde kullanamaz ve kullandıramazlar. Ödül alan ya da alamayan tüm illüstrasyonlar ve yarışmacı kimlik bilgileri yarışma kataloğunda
+                            (basılı ya da online) yayımlanacak, illüstrasyonlar akademik çalışmalarda kullanılabilecek ve tamamı sergilenebilecektir.
+                            Tüm katılımcıların illüstrasyonlarına ilişkin her türlü işleme hakkı Kayseri Üniversitesi Rektörlüğüne ait olacaktır.
+                            Ödül alan illüstrasyonların ticari hakları da Kayseri Üniversitesi Rektörlüğüne ait olup, bu illüstrasyonları Kayseri Üniversitesi Rektörlüğü kendi adına markalaştırabilecektir.
+                            <u>
+                                Bu kapsamda yarışmacıların 6769 sayılı Sinai Mülkiyet Kanunu, 5846 sayılı Fikir ve Sanat Eserleri Kanunu ve ilgili mevzuattan doğan tüm hakları Kayseri Üniversitesi Rektörlüğüne devredilmiş sayılacaktır.
+                            </u> Katılımcı ödül dışında herhangi bir telif hakkı talep edemeyecektir. Yarışmaya gönderilen eserlerin Fikir ve Sanat Eserleri Kanunu’ndan doğan tüm sorumlulukları katılımcıya ait olup, Kayseri Üniversitesi Rektörlüğü sorumlu tutulamaz.
+                        </p>
+                        <br />
+                        <input type="checkbox" name="onaycheckbox" class="form-checbox" value="true" /> Onaylıyorum
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+        <div class="col-md-12 col-sm-3 col-xs-3">
+
+            <div class="bx-pull-right">
+                <button class="btn btn-primary" id="onay">Başvuru Yap</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/MesajModal");}
+    @*@{Html.RenderPartial("../PartialView/OnayModal");}*@
+
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#onay").click(function () {
+                $('#onaymodal').modal('show');
+            })
+        var e = '@TempData["Error"]';
+            var s = '@TempData["Success"]';
+            if (e.length > 0 || s.length>0)
+            {
+             $('#mesajmodal').modal('show');
+             $('#onaymodal').modal('hide');
+             }
+
+      });
+
+    </script>
+}

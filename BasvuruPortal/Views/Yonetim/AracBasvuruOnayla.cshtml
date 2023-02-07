@@ -1,0 +1,249 @@
+﻿@model BasvuruPortal.Models.PersonelArac
+
+@{
+    ViewBag.Title = "Araç Başvuru Onayla";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+@section cssfile{
+    @{
+        Html.RenderPartial("../PartialViews/formCss");
+    }
+
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Araç BAŞVURU ONAYLAMA</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+@using (Html.BeginForm("AracBasvuruOnayla", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+
+                <div class="card-header">
+                    <h3 class="card-title">Başvuruyu Yapan </h3>
+                    <input type="hidden" value="@Model.ID" />
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                Başvuru No :
+                            </div>
+                            <div class="form-group">
+                                Adı Soyadı :
+                            </div>
+                            <div class="form-group">
+                                Sicil No :
+                            </div>
+                            <div class="form-group">
+                                Statu :
+                            </div>
+                            <div class="form-group">
+                                Birimi :
+                            </div>
+
+                            <div class="form-group">
+                                Unvanı :
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.ID)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.AdiSoyadi)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.SicilNo)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.statu.status)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.birimi)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.Unvan)
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                TC Kimlik No :
+                            </div>
+                            <div class="form-group">
+                                Cep Telefonu :
+                            </div>
+                            <div class="form-group">
+                                Uyruğu :
+                            </div>
+                            <div class="form-group">
+                                Araç Plakası :
+                            </div>
+                            <div class="form-group">
+                                Araç Modeli :
+                            </div>
+                            <div class="form-group">
+                                Model Yılı :
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.TCKimlikNo)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.CepTelefonu)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.uyruk)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.Plaka)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.AracModeli)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.ModelYili)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Onaylama Bilgileri </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @*<div class="col-md-2">
+                                <div class="form-group">
+                                    Kart ID
+                                </div>
+                            </div>*@
+                        <!--<div class="col-md-4">
+                        <div class="form-group">-->
+                        @*@Html.TextBoxFor(x => x.KartID, new { @class = "form-control" })*@
+                        <!--</div>
+                        </div>-->
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                Onay :
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+
+                            <input type="checkbox" name="secim" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(X => X.Aciklama, new { @class = "form-control", @placeholder = "Başvuruyu onaylamazsanız lütfen reddetme sebebini buraya yazınız" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="file" name="file" accept=".jpg,.png,.jpeg " /><br />
+                                @Html.ValidationMessage("resimyok", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <p style="color:red">*Başvuru Formunun imzalı görselini yükleyiniz</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ruhsat Bilgileri </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+                        @if (Model.ruhsatresim != null)
+                        {
+
+                            <img src="data:image;base64,@Convert.ToBase64String(Model.ruhsatresim)" width="50%" height="50%" class="img-fluid mb-2" alt="white sample" />
+                        }
+                        else
+                        {
+                            <p> Ruhsat Görseli Yüklenmemiştir.</p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Başvuru Form İmzalı Görseli </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @if (Model.formimage != null)
+                        {
+                            <img src="data:image;base64,@Convert.ToBase64String(Model.formimage)" width="50%" height="50%" class="img-fluid mb-2" alt="white sample" />
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="@Url.Action("AracBasvuruOnayBekleyenler","Yonetim")" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+
+}
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/MesajModal");}
+}
+@section scripts{
+    @{
+        Html.RenderPartial("../PartialViews/formScript");
+        Html.RenderPartial("../PartialView/_adminpanel");
+
+        <script>
+            $(document).ready(function () {
+
+        var e = '@TempData["Error"]';
+            var s = '@TempData["Success"]';
+            if (e.length > 0 || s.length>0)
+            {
+             $('#mesajmodal').modal('show');
+
+             }
+
+            });
+
+
+        </script>
+    }
+
+}

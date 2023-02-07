@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>KAYSEM Kursları Başvuru Formu </title>
+</head>
+<body>
+    <div>
+        <div class="row">
+            <div class="col col-md-9">
+                <table class="table" border="1">
+                    <tr style="text-align:center">
+                        <td colspan="2">
+                            <img src="~/images/kaysemlogo.png" />
+                            <br />
+                            KAYSERİ ÜNİVERSİTESİ
+                            <br /> SÜREKLİ EĞİTİM UYGULAMA VE ARAŞTIRMA MERKEZİ
+                            <br />  KURS BAŞVURU FORMU <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru No</td>
+                        <td>@Model.ID</td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru Yaptığı Kurs</td>
+                        <td>@Model.KursID</td>
+                    </tr>
+                    <tr>
+                        <td>Adı Soyadı</td>
+                        <td>@Model.BasvuruAdiSoyadi</td>
+                    </tr>
+                    <tr>
+                        <td>Cinsiyet</td>
+                        @if (Model.Cinsiyet == "E")
+                        {
+                            <td>Erkek</td>
+                        }
+                        else
+                        {
+                            <td>Kadın</td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <td>Cep Telefonu</td>
+                        <td>@Model.CepTelefonu</td>
+                    </tr>
+                    <tr>
+                        <td>Eposta Adresi</td>
+                        <td>@Model.MailAdresi</td>
+                    </tr>
+                    <tr>
+                        <td>Mesleği</td>
+                        <td>@Model.MeslekID</td>
+                    </tr>
+                    <tr>
+                        <td>Çalıştığı Kurum/Firma/İş Yeri</td>
+                        <td>@Model.CalistigiKurum</td>
+                    </tr>
+                    <tr>
+                        <td>Adres</td>
+                        <td>@Model.Adresi</td>
+                    </tr>
+                    <tr>
+                        <td>Mesaj</td>
+                        <td>@Model.Mesaj</td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru Tarihi</td>
+                        <td>@Model.BasvuruTarihi.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">**Başvurulara diploma ve nüfus cüzdanı fotokopileri ile banka dekontu eklenecektir.</td>
+
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            Kayseri Üniversitesi Sürekli Eğitim Uygulama ve Araştırma Merkezi Online Başvuru Sisteminden @Model.BasvuruTarihi.ToString("dd/MM/yyyy HH:mm") tarihinde
+                            başvuru yapılmıştır.<br />
+                            <br />  Ad Soyad:<br /> İmza :<br /><br />
+                        </td>
+                    </tr>
+                    <br />
+
+            </div>
+
+
+            <script>window.addEventListener("load", window.print());</script>
+
+
+
+        </div>
+
+        <script>
+        $(document).ready(function () {
+
+            var r = '@TempData["mesaj"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+           }
+                 })
+        </script>
+</body>
+</html>

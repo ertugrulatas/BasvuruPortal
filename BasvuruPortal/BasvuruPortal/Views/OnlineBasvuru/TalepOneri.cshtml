@@ -1,0 +1,117 @@
+﻿@model BasvuruPortal.Models.TalepOneri
+@{
+    ViewBag.Title = "TalepOneri";
+    Layout = "~/Views/Shared/_TalepLayout.cshtml";
+}
+
+<section class="contact section-bg">
+
+    <div class="container  data-aos=" fade-up"">
+        <div class="pt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.2577341933284!2d35.5505831484418!3d38.71189129150797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9cf6924d0a901ad5!2sKayseri%20%C3%9Cniversitesi%2015%20Temmuz%20Yerle%C5%9Fkesi!5e0!3m2!1str!2str!4v1610893201375!5m2!1str!2str" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div>
+
+        <div class="section-title">
+            <h2>İletişim</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="info-box">
+                            <i class="bx bx-map"></i>
+                            <h3>Kayseri Üniversitesi 15 Temmuz Yerleşkesi</h3>
+                            <p>Mevlana Mahallesi 15 Temmuz Yerleşkesi Kümeevler No:5 38280 Talas / KAYSERİ</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box mt-4">
+                            <i class="bx bx-phone-call"></i>
+                            <h3>Telefon Numaralarımız</h3>
+                            <p>+90 352 504 38 38</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box mt-4">
+                            <i class="bx bx-printer"></i>
+                            <h3>Fax Numaralarımız</h3>
+                            <p>+90 352 504 38 37</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                @using (Html.BeginForm("TalepOneri", "OnlineBasvuru", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col form-group">
+                        <b><u>Talep/Öneri</u> <span style="color:red">*(Zorunlu alan)</span></b>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownListFor(x => x.Tip, new List<SelectListItem> {
+                     new SelectListItem {
+                        Text="Talep",
+                        Value="T",
+                     },new SelectListItem {
+                        Text="Öneri",
+                        Value="O",
+                     }, new SelectListItem {
+                        Text="Şikayet",
+                        Value="S",
+                     }, }, "-- Seçiniz",
+                        new { @class = "form-control" })
+                        <div class="validate">
+                            @Html.ValidationMessageFor(model => model.Tip, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.BasvuruAdiSoyadi, new { @class = "form-control", @placeholder = "Adınız Soyadınız" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col form-group">
+                            @Html.TextBoxFor(x => x.MailAdresi, new { @class = "form-control", @placeholder = "Mail Adresiniz", @type = "email" })
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col form-group">
+                            @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control", @placeholder = "Telefon Numaranız" })
+                            <div class="validate"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Adresi, new { @class = "form-control", @placeholder = "Adresiniz" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Konu, new { @class = "form-control", @placeholder = "Konu" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(x => x.Mesaj, new { @class = "form-control", @placeholder = "Mesajınız", @rows = 4 })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="text-center"><button type="submit" class="btn btn-success">Gönder</button></div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/Modal");}
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var r = '@TempData["mesaj"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+           }
+        })
+    </script>
+}

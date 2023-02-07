@@ -1,0 +1,206 @@
+﻿@model BasvuruPortal.Models.PersonelEmail
+@{
+    ViewBag.Title = "MailBasvuruOnayla";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+@section cssfile{
+    @{
+        Html.RenderPartial("../PartialViews/formCss");
+    }
+
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>MAİL BAŞVURU ONAYLAMA</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+@using (Html.BeginForm("MailBasvuruOnayla", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+
+                <div class="card-header">
+                    <h3 class="card-title">Başvuruyu Yapan </h3>
+                    <input type="hidden" value="@Model.ID" />
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                Başvuru No :
+                            </div>
+                            <div class="form-group">
+                                Adı Soyadı :
+                            </div>
+                            <div class="form-group">
+                                Sicil No :
+                            </div>
+                            <div class="form-group">
+                                Statu :
+                            </div>
+                            <div class="form-group">
+                                Birimi :
+                            </div>
+
+                            <div class="form-group">
+                                Unvanı :
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.ID)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.AdiSoyadi)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.SicilNo)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.statu.status)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.birimi)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.Unvan)
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                TC Kimlik No :
+                            </div>
+                            <div class="form-group">
+                                Cep Telefonu :
+                            </div>
+                            <div class="form-group">
+                                Uyruğu :
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.TCKimlikNo)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.CepTelefonu)
+                            </div>
+                            <div class="form-group">
+                                @Html.DisplayFor(x => x.uyruk)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Onaylama Bilgileri </h3>
+                    @Html.ValidationMessage("MailAdresi", "", new { @class = "text-danger" })
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                Mail Adresi:
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.MailAdresi, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <b>  @Html.Raw("@kayseri.edu.tr") </b>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                Şifresi: <b>  @Html.DisplayFor(x => x.sifre) </b>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                Onay :
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="checkbox" name="secim" checked="checked" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="file" name="file" accept=".jpg,.png,.jpeg " /><br />
+                                @Html.ValidationMessage("resimyok", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <p style="color:red">*Başvuru Formunun imzalı görseli yoksa yükleyiniz</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </section><section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Başvuru Form İmzalı Görseli </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @if (Model.formimage != null)
+                        {
+                            <img src="data:image;base64,@Convert.ToBase64String(Model.formimage)" width="50%" height="50%" class="img-fluid mb-2" alt="white sample" />
+
+                        }
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a href="@Url.Action("MailOnayBekleyenler","Yonetim")" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+
+}
+@{
+    Html.RenderPartial("../PartialView/ModalError");
+
+}
+
+
+@section scripts{
+    @{
+        Html.RenderPartial("../PartialViews/formScript");
+        Html.RenderPartial("../PartialView/_adminpanel");
+        if (TempData["hata"] != null)
+        {
+
+            <script>
+                $('#myModal').modal('show');
+            </script>
+
+        }
+    }
+
+}

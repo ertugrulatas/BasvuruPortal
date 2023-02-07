@@ -1,0 +1,74 @@
+﻿@model List<BasvuruPortal.Models.PersonelArac>
+
+@{
+    ViewBag.Title = "Araç Basvuru Onay Bekleyenler";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+
+
+@section cssfile{
+    @{ Html.RenderPartial("../PartialViews/DataTableCss");}
+
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Araç Başvuru Onay Bekleyenler</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr align="center">
+                                    <th>Başvuru No</th>
+                                    <th>Adı Soyadı</th>
+                                    <th>Statusu</th>
+                                    <th>Birimi</th>
+                                    <th>Araç Plakası</th>
+                                    <th>Başvuru Tarihi</th>
+                                    <th>Düzenle</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr align="center">
+                                        <td width="5%" align="center">@item.ID</td>
+                                        <td>@item.AdiSoyadi</td>
+                                        <td>@item.statu.status</td>
+                                        <td align="center">@item.birimi</td>
+                                        <td align="center">@item.Plaka</td>
+                                        <td align="center">@item.BasvuruTarihi.ToString("dd/MM/yyyy HH.mm")</td>
+                                        <td align="center"><a href="@Url.Action("AracBasvuruOnayla",new { id = item.ID })"><i style="color:green" class="fas fa-edit"></i></a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr align="center">
+                                    <th>Başvuru No</th>
+                                    <th>Adı Soyadı</th>
+                                    <th>Statusu</th>
+                                    <th>Birimi</th>
+                                    <th>Araç Plakası</th>
+                                    <th>Başvuru Tarihi</th>
+                                    <th>Düzenle</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenID" />
+    </div>
+</section>
+
+<!-- /.card -->
+@section scripts{
+    @{ Html.RenderPartial("../PartialViews/DataTableScript");}}

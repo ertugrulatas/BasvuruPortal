@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Kayseri Üniversitesi Mezun Bilgi Sistemi">
+    <meta name="author" content="Ertuğrul ATAŞ">
+    <meta name="keywords" content="Kayseri Üniversitesi Online Başvuru, Online Başvuru, Kayseri Üniversitesi, KAYÜ, Kayseri">
+    <title>@ViewBag.Title</title>
+    <link href="~/images/kayu-32-2019.ico" rel="icon">
+    <link href="~/images/kayu-32-2019.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/Content/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="~/Content/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <style>
+        #logo {
+            width: 80px;
+            height: 80px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <img id="logo" src="~/images/Kayu-Logo-128x128.png" />
+            <h1 class="logo mr-auto"><a href="#">KAYSERİ ÜNİVERSİTESİ</a></h1>
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="~/Home/index">Ana Sayfa</a></li>
+                    <li class="drop-down">
+                        <a href="">Personel</a>
+                        <ul>
+                            <li><a href="@Url.Action("emailbasvuru","Personel")">E-MAİL Başvuru</a></li>
+                            <li><a href="@Url.Action("AracGirisKartiBasvuru","Personel")">Araç Giriş Kartı Başvuru</a></li>
+
+                            @*<li class="drop-down">
+                    <a href="#">Deep Drop Down</a>
+                    <ul>
+                        <li><a href="#">Deep Drop Down 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
+                </li>*@
+
+                        </ul>
+                    </li>
+                    <li class="drop-down">
+                        <a href="">Öğrenci</a>
+                        <ul>
+                            @*<li><a href="#">E-MAİL Başvurusu</a></li>*@
+                            <li><a href="#">Araç Giriş Kartı Başvurusu</a></li>
+
+                            @*<li class="drop-down">
+                    <a href="#">Deep Drop Down</a>
+                    <ul>
+                        <li><a href="#">Deep Drop Down 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
+                </li>*@
+
+                        </ul>
+                    </li>
+                    @*<li><a href="#about">Hakkımızda</a></li>*@
+
+
+                </ul>
+            </nav><!-- .nav-menu -->
+            @*<a href="~/Home/MezunKayit" class="get-started-btn">Kayıt Ol</a>*@
+
+        </div>
+    </header><!-- End Header -->
+    <!--Slider-->
+    @{Html.RenderPartial("../PartialView/Slider"); }
+    <!-- End Slider -->
+
+    @RenderBody()
+
+    <div id='myModal' class='modal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+
+    </div>
+    <!--Footer-->
+    <footer id="footer">
+        @{Html.RenderPartial("../PartialView/FooterPartial"); }
+
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+    @RenderSection("scripts", required: false)
+    <!-- Vendor JS Files -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/Content/vendor/php-email-form/validate.js"></script>
+    <script src="~/Content/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="~/Content/vendor/counterup/counterup.min.js"></script>
+    <script src="~/Content/vendor/venobox/venobox.min.js"></script>
+    <script src="~/Content/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/Content/vendor/aos/aos.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/Scripts/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mail Formu </title>
+</head>
+<body>
+    <div>
+        <div class="row">
+            <div class="col col-md-9">
+                <table class="table" border="1">
+                    <tr style="text-align:center">
+                        <td colspan="2">
+                            KAYSERİ ÜNİVERSİTESİ BİLGİ İŞLEM DAİRE BAŞKANLIĞI
+                            <br /> AKADEMİK VE İDARİ PERSONEL İÇİN
+                            <br />  ELEKTRONİK POSTA HESABI BAŞVURU FORMU
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru No</td>
+                        <td>@Model.ID</td>
+                    </tr>
+                    <tr>
+                        <td>Adı Soyadı</td>
+                        <td>@Model.AdiSoyadi</td>
+                    </tr>
+                    <tr>
+                        <td>T.C. Kimlik No</td>
+                        <td>@Model.TCKimlikNo</td>
+                    </tr>
+                    <tr>
+                        <td>Kurum Sicil No</td>
+                        <td>@Model.SicilNo</td>
+                    </tr>
+                    <tr>
+                        <td>Uyruğu</td>
+                        <td>@Model.uyruk</td>
+                    </tr>
+                    <tr>
+                        <td>Birimi / Bölümü</td>
+                        <td>@Model.birimi</td>
+                    </tr>
+                    <tr>
+                        <td>Cep Telefonu</td>
+                        <td>@Model.CepTelefonu</td>
+                    </tr>
+                    <tr>
+                        <td>İş Telefonu</td>
+                        <td>@Model.isTelefonu</td>
+                    </tr>
+                    <tr>
+                        <td>Başvuru Tarihi</td>
+                        <td>@Model.BasvuruTarihi.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            Kayseri Üniversitesi Bilgisayar Ağı ve Internet kullanım Yönergesine uymayı kabul ediyorum<br />
+                            <br />  İmza :
+                        </td>
+
+                    </tr>
+                    <tr style="text-align:center;background-color:gainsboro">
+                        <td colspan="2"> <b>BU KISIM BİLGİ İŞLEM DAİRESİ BAŞKANLIĞI TARAFINDAN DOLDURULACAKTIR.</b></td>
+                    </tr>
+                    <tr style="height:50px">
+                        <td>Kullanıcı Adı : ............................. kayseri.edu.tr</td>
+                        <td rowspan="2">
+                            Kontrol Eden  :
+
+                        </td>
+                    </tr>
+                    <tr style="height:50px">
+                        <td>Şifre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ....................................</td>
+                    </tr>
+                    <tr>
+                        <td align="left" colspan="2">
+                            - Yardım için yardim@kayseri.edu.tr adresine e-posta gönderebilir veya 10200 numaralı telefonları arayabilirsiniz.
+                            <br />   - E-posta hesabınıza https://webmail.kayseri.edu.tr adresinden erişebilirsiniz.
+                            <br />   - Üniversitemiz ile ilişiğiniz kesildiğinde (emeklilik hariç) bu hesabınız kapatılacaktır.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <a href="/Personel/emailbasvuru" class="btn btn-warning">Geri Dön</a>
+        </div>
+
+
+        <script>window.addEventListener("load", window.print());</script>
+    </div>
+</body>
+</html>

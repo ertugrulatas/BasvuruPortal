@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BasvuruPortal.Models.isguvenlik.isgBildirimler>
+@{
+    ViewBag.Title = "bildirimler";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+
+@section cssfile{
+    @{ Html.RenderPartial("../PartialViews/DataTableCss");}
+
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">İSG Bildirim Formları</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr align="center">
+                                    <th>Başvuru No</th>
+                                    <th>Bildirim Adı</th>
+                                    <th>Bildirimi Yapan</th>
+                                    <th>Bildirim Yeri</th>                                  
+                                    <th>Başvuru Tarih</th>
+                                    
+                                    <th>İçeriği Gör</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr align="center">
+                                    <td width="5%" align="center">@item.Id</td>
+                                    <td>@item.BildirimTanim.BildirimAdi</td>
+                                    <td>@item.AdSoyad</td>
+                                    <td>@item.Birim.BirimAdi</td>
+                                    <td align="center">@item.CreateDate.ToString("dd/MM/yyyy")</td>
+                                                               
+                                    <td align="center"><a href="@Url.Action("bildirimdetay",new { id = item.Id })"><i style="color:green" class="fas fa-edit"></i></a></td>
+                                </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr align="center">
+                                    <th>Başvuru No</th>
+                                    <th>Bildirim Adı</th>
+                                    <th>Bildirimi Yapan</th>
+                                    <th>Bildirim Yeri</th>
+                                    <th>Tarih</th>
+                                   
+                                    <th>İçeriği Gör</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenID" />
+    </div>
+</section>
+
+<!-- /.card -->
+@section scripts{
+    @{ Html.RenderPartial("../PartialViews/DataTableScript");}}
+
+

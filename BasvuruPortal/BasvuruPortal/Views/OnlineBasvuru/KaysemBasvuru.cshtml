@@ -1,0 +1,140 @@
+﻿@model BasvuruPortal.Models.Kaysem.KaysemBasvuru
+@{
+    ViewBag.Title = "KaysemBasvuru";
+    Layout = "~/Views/Shared/_TalepLayout.cshtml";
+}
+
+
+<section class="contact section-bg">
+
+    <div class="container  data-aos=" fade-up"">
+        <div class="row">
+            <div class="col-lg-6">
+                @using (@Html.BeginForm("KaysemBasvuru", "OnlineBasvuru", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="mailadres" value="deryabagci@kayseri.edu.tr" />
+                    <div class="section-title">
+                        Lütfen aşağıdaki alanları eksiksiz doldurunuz
+                    </div>
+                    <p style="color:red"> (*) Alanlar, Zorunlu Alanlardır </p>
+                    <div class="form-group">
+                        @Html.DropDownListFor(x => x.KursID, (IEnumerable<SelectListItem>)ViewBag.Kurs_ID, "* Lütfen Kurs Seçiniz", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.KursID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.TCKimlikNo, new { @class = "form-control", @placeholder = "* TC Kimlik Numaranız" })
+                        @Html.ValidationMessageFor(model => model.TCKimlikNo, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.BasvuruAdiSoyadi, new { @class = "form-control", @placeholder = "* Adınız Soyadınız" })
+                        @Html.ValidationMessageFor(model => model.BasvuruAdiSoyadi, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Cinsiyet, new List<SelectListItem> {
+                         new SelectListItem {
+                            Text="Erkek",
+                            Value="E",
+                         },new SelectListItem {
+                            Text="Kadın",
+                            Value="K",
+                         },}, "* Lütfen Cinsiyet Seçiniz",
+                    new { @class = "form-control" })
+                            <div class="validate">
+                                @Html.ValidationMessageFor(model => model.Cinsiyet, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.CepTelefonu, new { @class = "form-control", @placeholder = "* Cep Telefon Numaranız" })
+                        @Html.ValidationMessageFor(model => model.CepTelefonu, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.MailAdresi, new { @class = "form-control", @placeholder = "* E-Posta Adresiniz ", @type = "email" })
+                        @Html.ValidationMessageFor(model => model.MailAdresi, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                            @Html.DropDownListFor(x => x.MeslekID, (IEnumerable<SelectListItem>)ViewBag.MeslekID, "Lütfen Meslek Seçiniz", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MeslekID, "", new { @class = "text-danger" })
+                        </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.CalistigiKurum, new { @class = "form-control", @placeholder = "* Çalıştığınız Kurum/Firma/Bölüm" })
+                        @Html.ValidationMessageFor(model => model.CalistigiKurum, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(x => x.Adresi, new { @class = "form-control", @placeholder = "* Adresiniz" })
+                        @Html.ValidationMessageFor(model => model.Adresi, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(x => x.Mesaj, new { @class = "form-control", @placeholder = "Varsa İletmek İstediğiniz Mesaj" })
+                        @Html.ValidationMessageFor(model => model.Mesaj, "", new { @class = "text-danger" })
+                        <div class="validate"></div>
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                        <a href="https://kaysem.kayseri.edu.tr/EditorUpload/Files/f508849c-5989-4df6-a19f-02fbd50cbd1a.docx">Kurs Başvuru Formunu indirmek için tıklayınız.</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <span><b>Kurs Başvuru Formu</b></span>
+                            <input type="file" name="basvuru_formu" accept=".pdf " />
+                            @Html.ValidationMessageFor(model => model.Basvuru_Formu, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-7">
+                            <span style="color:red">* Kurs Başvuru Formunu doldurduktan sonra pdf formatında yükleyiniz</span>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <span><b>Dekont Belgesi</b></span>
+                            <input type="file" name="dekont" accept=".jpg,.jpeg,.pdf " />
+                            @Html.ValidationMessageFor(model => model.Dekont, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-7">
+                            <span style="color:red">*Dekontu pdf jpg formatında yükleyiniz</span>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <span><b>Diğer Belgeler</b></span>
+                            <input type="file" name="diger_belgeler" accept=".pdf,.jpg,.jpeg" />
+                            @Html.ValidationMessageFor(model => model.Diger_Belgeler, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-7">
+                            <span style="color:red">* Belgeleri pdf formatında yükleyiniz</span>
+                        </div>
+                    </div><br>
+                    <div class="text-left"><button type="submit" class="btn btn-success">Gönder</button></div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/Modal");}
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var r = '@TempData["mesaj"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+           }
+        })
+    </script>
+}}
+
+
+
+

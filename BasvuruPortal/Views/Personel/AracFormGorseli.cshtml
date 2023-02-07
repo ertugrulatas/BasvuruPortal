@@ -1,0 +1,97 @@
+﻿@model BasvuruPortal.ViewModels.PersonelEmailFormViewsModel
+@{
+    ViewBag.Title = "AracFormGorseli";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+<section class="inner-page">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            Email Başvurunuzun onaylanması ve Email hesabınızın açılması için Lütfen Başvuru Formunuzun çıktısını imzalayıp, buradan Sisteme Yüklenmesini sağlayınız.
+            <br />Sisteme yüklenmeyen imzalı başvuru formların Email hesabı açılmayacaktır. <br />
+            <span style="color:red">*Formun İmzalı Görseli Jpeg/PNG/JPG formatlarından biri olmalıdır</span>
+
+        </div>
+        <p style="color:red"> (*) Alanlar, Zorunlu Alanlardır </p>
+        @using (Html.BeginForm("AracFormGorseli", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.TCKimlik, new { @class = "form-control", @placeholder = "* TC Kimlik No" })
+                    @Html.ValidationMessageFor(model => model.TCKimlik, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.SicilNo, new { @class = "form-control", @placeholder = "* Kurum Sicil No" })
+                    @Html.ValidationMessageFor(model => model.SicilNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+
+                    <input type="file" name="dosya" accept="image/png, image/jpeg, image/jpg" /><br />
+                    @Html.ValidationMessage("dosya", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="col-md-6 form-group">
+                <a href="/Personel/AracGirisKartiBasvuru" class="btn btn-warning">Geri Dön</a>
+                <div class="bx-pull-right"> <button class="btn btn-primary" type="submit">Yükle</button></div>
+
+            </div>
+
+
+        }
+        @*<div class="mb-3" style="visibility:hidden">
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>*@
+        <br />
+        <div class="col-md-8">
+            Başvuru Formunuzu kaybettiyseniz yada yazıcıdan çıktısını alamadıysanız Lütfen <a href="@Url.Action("AracFormuYazdir","Personel")"> Tıklayınız</a>.
+        </div>
+    </div>
+
+</section>
+
+@section modal{
+    @{ if (TempData["hata"] != null)
+        {
+            Html.RenderPartial("../PartialView/ModalError");
+        }
+        if (TempData["Mesaj"] != null)
+        {
+            Html.RenderPartial("../PartialView/Modal");
+        }
+    }
+
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+         $(function() {
+             var r = '@TempData["hata"]';
+             var m = '@TempData["mesaj"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+            }
+             if (m.length > 0) {
+                 $('#myModal').modal('show');
+             }
+        });
+    </script>
+}
+
+
+

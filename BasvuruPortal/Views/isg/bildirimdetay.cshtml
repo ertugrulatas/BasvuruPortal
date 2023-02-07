@@ -1,0 +1,153 @@
+﻿@model BasvuruPortal.Models.isguvenlik.isgBildirimler
+@{
+    ViewBag.Title = "bildirimdetay";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+@section cssfile{
+    @{
+        Html.RenderPartial("../PartialViews/formCss");
+    }
+
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Bildirim Form Detay</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+
+            <div class="card-header">
+                <h3 class="card-title">Başvuruyu Yapan </h3>
+                <input type="hidden" value="@Model.Id" />
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Bildirim No :
+                        </div>
+                        <div class="form-group">
+                            Bildirim Tarihi :
+                        </div>
+                        <div class="form-group">
+                            Bildirim Adı :
+                        </div>
+
+                        <div class="form-group">
+                            Olay Yeri :
+                        </div>
+
+                        <div class="form-group">
+                            Olay Tarihi :
+                        </div>
+
+                        <div class="form-group">
+                            Olay Saati :
+                        </div>
+
+                        <div class="form-group">
+                            Bildirim Yapan Adı Soyadı :
+                        </div>
+
+                        <div class="form-group">
+                            Email :
+                        </div>
+                        <div class="form-group">
+                            Telefon :
+                        </div>
+                        <div class="form-group">
+                            Olay Açıklaması :
+                        </div>
+
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Id)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.CreateDate)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.BildirimTanim.BildirimAdi)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Birim.BirimAdi) -   @Html.DisplayFor(x => x.DigerBirim)
+                        </div>
+
+                        <div class="form-group">
+                            @Model.Tarih.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="form-group">
+                            @if (Model.Saat != null)
+                            {
+                                @Html.DisplayFor(x => x.Saat)
+                            }
+                            else
+                            {
+                                @Html.Label("-")
+                            }
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.AdSoyad)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Email)
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Telefon)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DisplayFor(x => x.Aciklama)
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Olay Fotosu veya Videosu </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    @if (Model.DosyaUrl != null)
+                    {
+
+                        if ((Model.DosyaTuru == "jpeg") || (Model.DosyaTuru == "jpg") || (Model.DosyaTuru == "png"))
+                        {
+
+                            <img src="~/Files/isg/@Model.DosyaAdi" width="50%" height="50%" class="img-fluid mb-2" alt="white sample" />
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Download","isg", new {id = Model.Id })" title="PDF Aç" target="_blank">
+                                Dosya Resim formatı olmadığından lütfen buraya tıklayarak Dosyayı indiriniz
+                            </a>
+                        }
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,188 @@
+﻿@model BasvuruPortal.Models.PersonelArac
+@{
+    ViewBag.Title = "Araç Giriş Kartı Başvuru";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+@section css{
+
+    <link href="~/Content/vendor/dropzone/dropzone.css" rel="stylesheet" />
+
+}
+<section class="inner-page">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            Lütfen aşağıdaki alanları eksiksiz doldurunuz
+        </div>
+        <p style="color:red"> (*) Alanlar, Zorunlu Alanlardır </p>
+        @using (Html.BeginForm("AracGirisKartiBasvuru", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.AdiSoyadi, new { @class = "form-control", @placeholder = "* Adınız Soyadınız" })
+                    @Html.ValidationMessageFor(model => model.AdiSoyadi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.TCKimlikNo, new { @class = "form-control", @placeholder = "* TC Kimlik No" })
+                    @Html.ValidationMessageFor(model => model.TCKimlikNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.SicilNo, new { @class = "form-control", @placeholder = "* Kurum Sicil No" })
+                    @Html.ValidationMessageFor(model => model.SicilNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.DropDownListFor(x => x.statuID, null, " Lütfen Statünüzü Seçiniz *", new { @class = "form-control", @id = "drop" })
+                    @Html.ValidationMessageFor(model => model.statuID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 form-group">
+                    @Html.TextBoxFor(x => x.StatuDiger, new { @id = "diger", @class = "form-control", @placeholder = " Diğer seçiliyse doldurunuz" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.Unvan, new { @class = "form-control", @placeholder = "* Unvanınız" })
+                    @Html.ValidationMessageFor(model => model.Unvan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.birimi, new { @class = "form-control", @placeholder = "* Biriminiz/ Bölümünüz" })
+                    @Html.ValidationMessageFor(model => model.birimi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.Mailadres, new { @type = "email", @class = "form-control", @placeholder = "* Mail Adresiniz" })
+                    @Html.ValidationMessageFor(model => model.Mailadres, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.CepTelefonu, new { @class = "form-control", @placeholder = "* Cep Telefon Numaranız" })
+                    @Html.ValidationMessageFor(model => model.CepTelefonu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.isTelefonu, new { @class = "form-control", @placeholder = " İş Telefonunuz" })
+                    @Html.ValidationMessageFor(model => model.isTelefonu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.Plaka, new { @class = "form-control", @placeholder = "* Aracın Plakası" })
+                    @Html.ValidationMessageFor(model => model.AracModeli, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.AracModeli, new { @class = "form-control", @placeholder = "* Aracın Markası / Modeli" })
+                    @Html.ValidationMessageFor(model => model.AracModeli, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.ModelYili, new { @class = "form-control", @placeholder = "* Model Yılı" })
+                    @Html.ValidationMessageFor(model => model.ModelYili, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.RuhsatSahibi, new { @class = "form-control", @placeholder = "Ruhsat Sahibi" })
+                    @Html.ValidationMessageFor(model => model.AracModeli, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6 form-group">
+                    <span style="color:red">
+                        *Araç başkası üzerine kayıtlı ise doldurunuz.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.TextBoxFor(x => x.RuhsatSahibiYakinlik, new { @class = "form-control", @placeholder = "Ruhsat Sahibine Yakınlık" })
+                    @Html.ValidationMessageFor(model => model.AracModeli, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6 form-group">
+                    <span style="color:red">
+                        *Araç başkası üzerine kayıtlı ise doldurunuz.
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <input type="file" name="file" accept=".jpg,.png,.jpeg " /> <br />
+                    @Html.ValidationMessageFor(model => model.ruhsatresim, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-md-6 form-group">
+                    <span style="color:red">* Aracın Ruhsat Fotoğrafını jpg, jpeg, png formatında yükleyiniz</span>
+                </div>
+            </div>
+            <br />
+           
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+                <div class="col-md-12 col-sm-4 col-xs-4">
+
+                    <div class="bx-pull-left"> <button class="btn btn-primary" type="submit">Başvuru Yap</button></div>
+                </div>
+
+                <div class="col-md-12 col-sm-8 col-xs-8 ">
+                    <div class="bx-pull-right">
+                        <a href="/Personel/AracFormGorseli" class="btn btn-danger">İmzalı Başvuru Formunu Yükle</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</section>
+@section modal{
+    @{Html.RenderPartial("../PartialView/ModalError");}
+
+}
+@section scripts{
+    <script src="~/Content/vendor/dropzone/dropzone.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#diger').hide();
+
+            $('#drop').change(function () {
+                var selectedValue = $('#drop').val();
+                if (selectedValue == 6)
+                    $('#diger').show();
+                else
+                    $('#diger').hide();
+            });
+
+              var r = '@TempData["hata"]';
+           if (r.length>0)
+           {
+                $('#myModal').modal('show');
+           }
+
+
+        });
+
+    </script>
+
+}

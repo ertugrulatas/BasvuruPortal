@@ -1,0 +1,144 @@
+﻿@model BasvuruPortal.Models.isguvenlik.isgBildirimler
+@{
+    ViewBag.Title = "BildirimFormu";
+    Layout = "~/Views/Shared/_singlePage.cshtml";
+}
+
+<section class="inner-page">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+
+            <h6 style="text-align:justify">  @Html.Raw(ViewBag.aciklama) </h6>
+        </div>
+
+
+        @using (Html.BeginForm("BildirimFormu", "isg", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <p><u>Bildirim Yeri</u></p>
+            <div class=" row col-md-8 form-group">
+                @Html.HiddenFor(x => x.BildirimTanimId)
+            </div>
+
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Olayın Meydana Geldiği Tarih
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", @type = "date" })
+                    @Html.ValidationMessageFor(model => model.AdSoyad, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Olayın Meydana Geldiği Saat
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextBoxFor(x => x.Saat, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Olayın Meydan Geldiği Yer
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.DropDownListFor(x => x.BirimId, (IEnumerable<SelectListItem>)ViewBag.BirimId, "Lütfen Aşağıdaki Listeden seçiniz", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row col-md-12 form-group">
+                <label style="color:red"> (* Birimler içerisinde olmayan birim var ise listeden Diğer(Listede olmayan) seçimini yaparak. Birim adını aşağıdaki alana yazınız) </label>
+
+            </div>
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Diğer Birim Adı
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextBoxFor(x => x.DigerBirim, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3 col-xs-6">
+                </div>
+            </div>
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Olayın Açıklaması-İyileştirme Önerisi
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control", @rows = 5 })
+                </div>
+            </div>
+            <br />
+            <p><u>Bildirim Yapan Kişinin:</u></p>
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Adınız Soyadınız
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextBoxFor(x => x.AdSoyad, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AdSoyad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Email Adresiniz
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AdSoyad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Telefon Numaranız
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AdSoyad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row col-md-12 form-group">
+                <div class="col-md-4 col-xs-6">
+                    Varsa Fotoğraf veya Videosunu Yükleyiniz
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    <input type="file" name="files" />
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+                <div class="bx-pull-right">
+
+                    <div class="bx-pull-left"> <button class="btn btn-primary" type="submit">Başvuru Yap</button></div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</section>
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/MesajModal");}
+
+}
+
+@section scripts{
+
+    <script>
+        var s = '@TempData["Success"]';
+        var e= '@TempData["Error"]';
+            if (e.length > 0 || s.length>0)
+            {
+                $('#mesajmodal').modal('show');
+            }
+    </script>
+
+}
+
