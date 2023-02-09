@@ -2112,6 +2112,7 @@
     <Compile Include="Models\Kaysem\KaysemKurs.cs" />
     <Compile Include="Models\Kaysem\KaysemMeslek.cs" />
     <Compile Include="Models\Ogrenci\OgrenciArac.cs" />
+    <Compile Include="Models\Ogrenci\TekDersBasvuru.cs" />
     <Compile Include="Models\OneriSikayet\TalepOneri.cs" />
     <Compile Include="Models\Personel\PersonelArac.cs" />
     <Compile Include="Models\Personel\PersonelEmail.cs" />
@@ -2402,6 +2403,7 @@
     <Content Include="Views\OnlineBasvuru\Kaysembasvurudetay.cshtml" />
     <Content Include="Views\TekDersBasvuru\Index.cshtml" />
     <Content Include="Views\TekDersBasvuru\Giris.cshtml" />
+    <Content Include="Views\Shared\_OgrenciLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

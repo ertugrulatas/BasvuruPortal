@@ -10,6 +10,7 @@ namespace BasvuruPortal.Models
     [Table("PersonelArac")]
     public class OgrenciArac
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Ad Soyad alanı boş geçilemez")]
