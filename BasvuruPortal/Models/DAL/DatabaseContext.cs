@@ -34,7 +34,8 @@ namespace BasvuruPortal.Models.DAL
         public DbSet<KaysemKurs> kaysemKurss { get; set; }
         public DbSet<KaysemMeslek> kaysemMesleks { get; set; }
 
-       
+       public DbSet<TekDersBasvuru> TekDersBasvurus { get; set; }
+        public DbSet<TekDersDonemi> TekDersDonemis { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

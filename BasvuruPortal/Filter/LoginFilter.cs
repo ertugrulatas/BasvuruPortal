@@ -14,9 +14,11 @@ namespace BasvuruPortal.Filter
             {
                 filterContext.Result = new HttpUnauthorizedResult();
                 filterContext.Result = new RedirectResult("~/Home/Error505");
-            }
+            } 
 
-           
+          
+
+
         }
     }
 }
