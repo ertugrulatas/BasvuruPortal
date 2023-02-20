@@ -25,6 +25,7 @@ namespace BasvuruPortal.Models
         public string OgrenciSoyadi { get; set; }       
         public string OgrenciTelefon { get; set; }
         public string OgrenciEmail { get; set; }
+        public string OgrenciAdres { get; set; }
         public  Nullable<DateTime> DersAlmaZamani { get; set; }
         public bool DersSecim { get; set; } //1 onay verenler 0 işlem yapmayanlar
         public string EgitmenSicilNo { get; set; }

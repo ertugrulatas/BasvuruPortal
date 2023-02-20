@@ -41,7 +41,9 @@ namespace BasvuruPortal.Models.Kaysem
         public string Dekont { get; set; }
         [Required(ErrorMessage = "İstenilen diğer belgeleri yüklemediniz!")]
         public string Diger_Belgeler { get; set; }
-        
+
+        [Required(ErrorMessage = "Taahhüt Bilgilerini Onaylamadınız!")]
+        public bool TaahhutOnay { get; set; }        
         public DateTime BasvuruTarihi { get; set; }
         public string Guid { get; set; }
         public bool Onay { get; set; }

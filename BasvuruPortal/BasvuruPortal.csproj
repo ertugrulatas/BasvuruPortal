@@ -2103,6 +2103,10 @@
     <Compile Include="Migrations\202302090750177_tekders.designer.cs">
       <DependentUpon>202302090750177_tekders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302200812123_tekders2.cs" />
+    <Compile Include="Migrations\202302200812123_tekders2.designer.cs">
+      <DependentUpon>202302200812123_tekders2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\DatabaseContext.cs" />
     <Compile Include="Models\DAL\Myinital.cs" />
@@ -2432,6 +2436,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202302090750177_tekders.resx">
       <DependentUpon>202302090750177_tekders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302200812123_tekders2.resx">
+      <DependentUpon>202302200812123_tekders2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
