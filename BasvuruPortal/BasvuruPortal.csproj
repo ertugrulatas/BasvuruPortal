@@ -2099,18 +2099,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202302090750177_tekders.cs" />
-    <Compile Include="Migrations\202302090750177_tekders.designer.cs">
-      <DependentUpon>202302090750177_tekders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202302200812123_tekders2.cs" />
-    <Compile Include="Migrations\202302200812123_tekders2.designer.cs">
-      <DependentUpon>202302200812123_tekders2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\DatabaseContext.cs" />
     <Compile Include="Models\DAL\Myinital.cs" />
     <Compile Include="Models\Genel\Birimler.cs" />
+    <Compile Include="Models\Genel\LogData.cs" />
     <Compile Include="Models\Genel\Statu.cs" />
     <Compile Include="Models\Genel\user.cs" />
     <Compile Include="Models\HataUsulYolsuzluk\HataUsulYolsuzluk.cs" />
@@ -2428,18 +2421,9 @@
     <Folder Include="Files\kaysem\diger_belgeler\" />
     <Folder Include="Files\yarisma\" />
     <Folder Include="Models\OBISIS\" />
-    <Folder Include="Views\TekDers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202302090750177_tekders.resx">
-      <DependentUpon>202302090750177_tekders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302200812123_tekders2.resx">
-      <DependentUpon>202302200812123_tekders2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

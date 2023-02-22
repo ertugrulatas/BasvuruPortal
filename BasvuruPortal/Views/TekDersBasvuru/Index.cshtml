@@ -16,35 +16,34 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <!-- Profile Image -->
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
-                        <div class="text-center">
-
-                        </div>
-
-                        <h3 class="profile-username text-center">@Model.OgrenciAdi @Model.OgrenciSoyadi</h3>
-
-                        <p class="text-muted text-center">@Model.BolumAdi</p>
+                       
+                        <h3 class="profile-username text-center"> @Model.OgrenciAdi @Model.OgrenciSoyadi</h3>
+                        <p class="text-muted text-center">@Model.OgrenciNo</p>
+                       
 
                         <ul class="list-group list-group-unbordered mb-3">
+
                             <li class="list-group-item">
-                               Ders Adı: <b>@Model.DersAdi</b> 
+                                Fakülte/MYO : <b>@Model.FakulteAdi</b>
                             </li>
-                       
+                            <li class="list-group-item">
+                                Bölüm : <b>@Model.BolumAdi</b>
+                            </li>
+                            <li class="list-group-item">
+                                Ders Adı : <b>@Model.DersAdi</b>
+                            </li>
+
                         </ul>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
-                <!-- About Me Box -->
-          
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
-            <div class="col-md-9">
+
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
@@ -57,17 +56,83 @@
                             <div class="active tab-pane" id="activity">
                                 <!-- Tek ders onayı verdiyse burada onay butonu yerine tek ders başvurusnun yaptoğına dair yazı gelecek -->
                                 <div class="post">
-                                    <p>@Model.TekDersDonem.TekDersDonemAdi yapılacak olan tek ders sınavına katılmak istiyorum</p>
-                                    <p><a href="#" class="btn btn-success"> Onay</a></p> <!--Tek ders tarihleri arası aktif olacak-->
+                                    @if ((Model.TekDersDonem.BitisTarihi > DateTime.Now) && (Model.TekDersDonem.BaslangicTarihi < DateTime.Now))
+                                    {
+
+                                        if (Model.DersSecim == false)
+                                        {
+                                            <p>@Model.SinavTarihi.Value.ToString("dd/MM/yyyy") tarihinde, Saat @Model.SinavTarihi.Value.ToString("HH:mm")  da yapılacak olan tek ders sınavına katılmak istiyorsanız aşağıdaki onay butonu işlemi gerçekleştiriniz</p>
+
+
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#onaymodal">
+                                                Onay
+                                            </button>
+
+                                            <!--Tek ders tarihleri arası aktif olacak-->
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                @Model.DersAlmaZamani.Value.ToString("dd/MM/yyyy") tarihinde tek ders sınavına katılım onayınız alınmıştır.
+                                            </p>
+                                            <p style="color:red">
+                                                Sınava katılmaktan vazgeçerseniz, @Model.TekDersDonem.BitisTarihi.Value.ToString("dd/MM/yyyy") tarihine kadar aşağıdaki buton ile iptal işlemini yapabilirsiniz. Bu tarihten sonra herhangi bir işlem yapılamaz
+                                            </p>
+
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#iptalmodal">
+                                                İptal Et
+                                            </button>
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        if (Model.DersSecim == true)
+                                        {
+                                            <p>   @Model.DersAlmaZamani.Value.ToString("dd/MM/yyyy") tarihinde tek ders sınavına katılım onayınız alınmıştır.</p>
+                                        }
+                                        else
+                                        {
+                                            if (Model.TekDersDonem.BitisTarihi < DateTime.Now)
+                                            {
+                                                <p>Tek ders Sınavına katılım başvurusu @Model.TekDersDonem.BitisTarihi.Value.ToString("dd/MM/yyyy") tarihinde sona ermiştir.Bu nedenle başvuru yapamazsınız</p>
+                                            }
+
+                                            if (Model.TekDersDonem.BaslangicTarihi > DateTime.Now)
+                                            {
+                                <p>Tek ders Sınavına katılım başvuru işlemleri @Model.TekDersDonem.BaslangicTarihi.Value.ToString("dd/MM/yyyy") tarihinde saat @Model.TekDersDonem.BaslangicTarihi.Value.ToString("HH:mm")   aktif olacaktir. Başvurunuzu bu tarihte yapabilirsiniz.</p>
+                                            }
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
-                        <!-- /.tab-content -->
-                    </div><!-- /.card-body -->
+                    </div>
                 </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <p>
+                            1. @Model.TekDersDonem.TekDersDonemAdi  <b><u>@Model.TekDersDonem.SinavTarihi.Value.ToString("dd/MM/yyyy") </u></b> tarihinde saat <b> <u> @Model.TekDersDonem.SinavTarihi.Value.ToString("HH:mm")</u></b> da bağlı bulunduğunuz Fakülte/MYO da yüz yüze yapılacaktır.
+                            <br />
+                            2. Tek ders sınavına başvuru işlemlerinizi <b>
+                                <u>
+                                    @Model.TekDersDonem.BaslangicTarihi.Value.ToString("dd/MM/yyyy") - @Model.TekDersDonem.BitisTarihi.Value.ToString("dd/MM/yyyy")
+                                </u>
+                            </b>
+                            tarihleri arasında gerçekleştirebilirsiniz. Bu tarih sonrasında herhangi bir işlem yapılamamaktadir.
+                            <br />
+                            3. Yukarıdaki bilgilerde herhangi bir hata olduğunu düşünüyorsanız işlem yapmadan önce Öğrenci İşleri Daire Başkanlığı ile görüşünüz.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -75,4 +140,64 @@
 
 
 
+@section modal{
+
+    <!--Onay Modal-->
+}
+<div class="modal fade" id="onaymodal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tek Ders Sınavına Katılım Onayı</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="color:blue">@Model.TekDersDonem.SinavTarihi.Value.ToString("dd/MM/yyyy") tarihinde yapılacak olan tek ders sınavına katılmak istiyorum</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                @using (@Html.BeginForm("TekDersSinavOnay", "TekDersBasvuru", FormMethod.Post))
+                {
+
+                    @Html.TextBoxFor(x => x.OgrenciNo, new { @type = "hidden" })
+                    @Html.TextBoxFor(x => x.TekDersDonemId, new { @type = "hidden" })
+
+                    <button type="submit" class="btn btn-primary">Onayla</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!---->
+<!--İPTAL MODAL-->
+<div class="modal fade" id="iptalmodal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tek Ders Sınavı Başvuru İptali</h4>
+                <p style="color:red"> (Başvurunuzu iptal ederseniz tek ders sınavına giremezsiniz)</p>
+            </div>
+            <div class="modal-body">
+                <p style="color:red">@Model.TekDersDonem.SinavTarihi.Value.ToString("dd/MM/yyyy") tarihinde yapılacak olan tek ders sınavına  yapmış olduğum başvuruyu iptal etmek istiyorum. </p>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                @using (@Html.BeginForm("Basvuruiptal", "TekDersBasvuru", FormMethod.Post))
+                {
+
+                    @Html.TextBoxFor(x => x.OgrenciNo, new { @type = "hidden" })
+                    @Html.TextBoxFor(x => x.TekDersDonemId, new { @type = "hidden" })
+
+                    <button type="submit" class="btn btn-primary">İptal ET</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
 

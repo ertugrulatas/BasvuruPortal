@@ -1,7 +1,9 @@
 ﻿using BasvuruPortal.Filter;
+using BasvuruPortal.Models;
 using BasvuruPortal.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,12 +19,12 @@ namespace BasvuruPortal.Controllers
         //[LoginFilter]
         public ActionResult Index()
         {
-          if (string.IsNullOrEmpty(Convert.ToString(HttpContext.Session["OgrNo"])))
+            if (string.IsNullOrEmpty(Convert.ToString(HttpContext.Session["OgrNo"])))
             {
-               
-               return RedirectToAction("Giris");
-            } 
-            string TCKNo = Session["TCKNo"].ToString() ;
+
+                return RedirectToAction("Giris");
+            }
+            string TCKNo = Session["TCKNo"].ToString();
             string OgrNo = Session["OgrNo"].ToString();
             var model = db.TekDersBasvurus.Where(x => x.OgrenciTCKNo == TCKNo && x.OgrenciNo == OgrNo).SingleOrDefault();
             return View(model);
@@ -38,25 +40,88 @@ namespace BasvuruPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Giris(string OgrNo, string TCKNo)
         {
-            var ogr = db.TekDersBasvurus.Where(x => x.OgrenciTCKNo == TCKNo && x.OgrenciNo == OgrNo).FirstOrDefault();
+            var donemaktif = db.TekDersDonemis.Where(x => x.Durum == true).SingleOrDefault();
+            if ((donemaktif != null) && (donemaktif.SinavTarihi>DateTime.Now))
+            {
+
+
+                var ogr = db.TekDersBasvurus.Where(x => x.OgrenciTCKNo == TCKNo && x.OgrenciNo == OgrNo && x.TekDersDonemId == donemaktif.Id).FirstOrDefault();
+                if (ogr != null)
+                {
+
+                    FormsAuthentication.SetAuthCookie(OgrNo, false);
+                    Session.Clear();
+                    Session.Add("OgrNo", OgrNo);
+                    Session.Add("TCKNo", TCKNo);
+                    Session.Timeout = 60;
+
+                    return RedirectToAction("Index");
+                }
+                else  //Kullanıcı Durum Pasif ise
+                {
+                    TempData["Mesaj"] = "Tek ders sınav hakkınız bulunmamaktadır. Hata olduğunu düşünüyorsanız, Öğrenci İşleri Daire Başkanlığı ile görüşünüz";
+
+                }
+            }
+            else
+            {
+                TempData["Mesaj"] = "Tek ders sınavı başvuru dönemi kapalıdır. Başvuru döneminde belirtilen tarihte sisteme giriş yapılabilir";
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult TekDersSinavOnay(TekDersBasvuru model)
+        {
+            
+            var ogr = db.TekDersBasvurus.Where(x => x.OgrenciNo == model.OgrenciNo && x.TekDersDonemId == model.TekDersDonemId).FirstOrDefault();
             if (ogr != null)
             {
+                ogr.DersAlmaZamani = DateTime.Now;
+                ogr.DersSecim = true;
+                db.Entry(ogr).State = EntityState.Modified;
+               db.SaveChanges();
 
-               FormsAuthentication.SetAuthCookie(OgrNo, false);
-                Session.Clear();
-                Session.Add("OgrNo", OgrNo);
-                Session.Add("TCKNo", TCKNo);
-                Session.Timeout = 60;
+                LogData _log = new LogData();
+                _log.CRUD = 3;
+                _log.IPAdress= HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Request.UserHostAddress;
+                _log.islemTarihi = DateTime.Now;
+                _log.OgrenciNo = ogr.OgrenciNo;
+                _log.Yapilanislem = "TekdersKatılımOnay";
+                db.LogDatas.Add(_log);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
             }
-            else  //Kullanıcı Durum Pasif ise
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Basvuruiptal(TekDersBasvuru model)
+        {
+
+            var ogr = db.TekDersBasvurus.Where(x => x.OgrenciNo == model.OgrenciNo && x.TekDersDonemId == model.TekDersDonemId).FirstOrDefault();
+            if (ogr != null)
             {
-                TempData["Mesaj"] = "Giriş Yetkiniz Yoktur. Öğrenci İşleri Daire Başkanlığı ile görüşünüz";
-               
-            }
+                ogr.DersAlmaZamani = null;
+                ogr.DersSecim = false;
+               db.Entry(ogr).State = EntityState.Modified;
+                db.SaveChanges();
 
-            return View();
+                LogData _log = new LogData();
+                _log.CRUD = 3;
+                _log.IPAdress = HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Request.UserHostAddress;
+                _log.islemTarihi = DateTime.Now;
+                _log.OgrenciNo = ogr.OgrenciNo;
+                _log.Yapilanislem = "TekdersKatılımİptali";
+                db.LogDatas.Add(_log);
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("Index");
         }
     }
 }

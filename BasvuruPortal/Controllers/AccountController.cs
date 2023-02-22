@@ -71,7 +71,7 @@ namespace BasvuruPortal.Controllers
             Session.Abandon();
             Session.RemoveAll();
             FormsAuthentication.SignOut();
-            return RedirectToAction("Giris");
+            return RedirectToAction("Index","Home");
         }
     }
 }

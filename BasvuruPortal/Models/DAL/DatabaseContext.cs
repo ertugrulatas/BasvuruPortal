@@ -36,6 +36,9 @@ namespace BasvuruPortal.Models.DAL
 
        public DbSet<TekDersBasvuru> TekDersBasvurus { get; set; }
         public DbSet<TekDersDonemi> TekDersDonemis { get; set; }
+
+
+        public DbSet<LogData> LogDatas { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

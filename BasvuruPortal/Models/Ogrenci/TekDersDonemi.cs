@@ -15,6 +15,8 @@ namespace BasvuruPortal.Models
         public int TekdersYili { get; set; }//2023
         public byte TekdersDonemNo { get; set; } //1 2 3 gibi
         public string TekDersDonemAdi { get; set; }
+
+        public Nullable<DateTime> SinavTarihi { get; set; }
         public Nullable<DateTime> BaslangicTarihi { get; set; }
         public Nullable<DateTime> BitisTarihi { get; set; }
         public bool Durum { get; set; }
