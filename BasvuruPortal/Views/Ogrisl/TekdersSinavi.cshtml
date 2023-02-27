@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "TekdersSinavi";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<section class="content-header">
+    <div class="container-fluid">
+
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <p>Tek Ders Dönemi  </p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.Donem</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("TekDersDonemler","Ogrisl")" class="small-box-footer">Dönem Ayarları <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <p>Tek Ders Sınav Tarihi - Saati</p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.sinavTarihi.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer"> <i class="fas fa-arrow-alt-circle-up"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <p>Dönem Başvuru Başlangıç Tarihi - Saati</p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.BasvuruBaslamaTarihi.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer"> <i class="fas fa-arrow-alt-circle-up"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <p>Dönem Başvuru Bitiş Tarihi - Saati</p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.BasvuruBitisTarihi.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer"> <i class="fas fa-arrow-alt-circle-up"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-gradient-indigo">
+                    <div class="inner">
+                        <p>Aktif Dönem Sınava Girecek Öğrenci Sayısı  </p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.SinavaKatilacakSayi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("TekDersSinavListesi","Ogrisl")" class="small-box-footer">Öğrenci Listesi <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-gradient-green">
+                    <div class="inner">
+                        <p>Aktif Dönem Sınav Onaylayan Öğrenci Sayısı  </p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.DersOnaylayanSayi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="#" class="small-box-footer"> <i class="fas fa-arrow-alt-circle-up"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-gradient-fuchsia">
+                    <div class="inner">
+                        <p>Aktif Dönem Sınav Onay Bekleyen Öğrenci Sayısı</p>
+                        <hr />
+                        <p style="text-align:center">@ViewBag.DersOnayBekleyen</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer"> <i class="fas fa-arrow-alt-circle-up"></i></a>
+                </div>
+            </div>
+
+
+
+        </div>
+        
+    </div><!-- /.container-fluid -->
+</section>
+

@@ -3,7 +3,7 @@ using BasvuruPortal.Filter;
 using BasvuruPortal.Models;
 using BasvuruPortal.Models.DAL;
 using BasvuruPortal.Models.Kaysem;
-using BasvuruPortal.ObisisVeritabani;
+
 using BasvuruPortal.Service;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace BasvuruPortal.Controllers
         // GET: OnlineBasvuru
 
         DatabaseContext db = new DatabaseContext();
-        OBISIS_KAYSERIEntities obp = new OBISIS_KAYSERIEntities();
+      
         public ActionResult TalepOneri()
         {
             return View();

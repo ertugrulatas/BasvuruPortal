@@ -1,0 +1,166 @@
+﻿@model BasvuruPortal.Models.TekDersBasvuru
+@{
+    ViewBag.Title = "TekdersOgrenciEkle";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- right column -->
+        <div class="col-md-9">
+            <div class="card card-green">
+                <div class="card-header">
+                    <h3 class="card-title">Tek Ders Sınavı Öğrenci Ekleme</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (@Html.BeginForm("TekdersOgrenciEkle", "Ogrisl", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Tek Ders Dönemi (*Açık olan dönem)</label>
+                                    @Html.DropDownListFor(x => x.TekDersDonemId, null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label> Fakülte kodu</label>
+                                    @Html.TextBoxFor(x => x.FakulteKodu, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label> Fakülte Adı *</label>
+                                    @Html.TextBoxFor(x => x.FakulteAdi, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label> Bölüm Kodu</label>
+                                    @Html.TextBoxFor(x => x.BolumKodu, new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Bölüm Adı *</label>
+                                    @Html.TextBoxFor(x => x.BolumAdi, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label> Ders Adı *</label>
+                                    @Html.TextBoxFor(x => x.DersAdi, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Öğrenci Numarası *</label>
+                                    @Html.TextBoxFor(x => x.OgrenciNo, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>TC Kimlik No *</label>
+                                    @Html.TextBoxFor(x => x.OgrenciTCKNo, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Öğrenci Adı *</label>
+                                    @Html.TextBoxFor(x => x.OgrenciAdi, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Öğrenci Soyadı *</label>
+                                    @Html.TextBoxFor(x => x.OgrenciSoyadi, new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Öğrenci Telefon</label>
+                                    @Html.TextBoxFor(x => x.OgrenciTelefon, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Öğrenci Mail</label>
+                                    @Html.TextBoxFor(x => x.OgrenciEmail, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Öğrenci Adres</label>
+                                    @Html.TextBoxFor(x => x.OgrenciAdres, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="fa-pull-right"><button type="submit" class="btn btn-primary">Kaydet</button></div>
+
+                    }
+                </div>
+                <p><u>Notlar</u> </p>
+                <p>  1 - Öğrenci eklemeden önce Aktif dönem açılmalıdır.Aktif dönem açılmadan öğrenci kaydetme işlemi gerçekleşmeyecektir.</p>
+                <p>  2 - Dönemin sınav tarihi ve sınav saati belirlenmiş olacak, Bu tarih ve saat Öğrencilere başvuru yaparken yansıtılacaktır.</p>
+                <p>  3 - * Alanlarla zorunlu alanlardır. Mutlaka doldurulması gerekmektedir.</p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<a href="@Url.Action("TekDersSinavListesi","Ogrisl")" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/MesajModal");}
+
+}
+
+
+@section scripts{
+    @{
+        Html.RenderPartial("../PartialViews/formScript");
+        Html.RenderPartial("../PartialView/_adminpanel");
+    }
+    @if (TempData["Error"] != null)
+    {
+
+        <script>
+            $('#mesajmodal').modal('show');
+        </script>
+
+    }
+}
+
+
+
+
+

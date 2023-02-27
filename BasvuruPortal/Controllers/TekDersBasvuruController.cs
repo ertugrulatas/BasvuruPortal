@@ -1,6 +1,7 @@
 ﻿using BasvuruPortal.Filter;
 using BasvuruPortal.Models;
 using BasvuruPortal.Models.DAL;
+using BasvuruPortal.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -41,7 +42,7 @@ namespace BasvuruPortal.Controllers
         public ActionResult Giris(string OgrNo, string TCKNo)
         {
             var donemaktif = db.TekDersDonemis.Where(x => x.Durum == true).SingleOrDefault();
-            if ((donemaktif != null) && (donemaktif.SinavTarihi>DateTime.Now))
+            if ((donemaktif != null) && (donemaktif.SinavTarihi > DateTime.Now))
             {
 
 
@@ -72,26 +73,19 @@ namespace BasvuruPortal.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult TekDersSinavOnay(TekDersBasvuru model)
         {
-            
+
             var ogr = db.TekDersBasvurus.Where(x => x.OgrenciNo == model.OgrenciNo && x.TekDersDonemId == model.TekDersDonemId).FirstOrDefault();
             if (ogr != null)
             {
                 ogr.DersAlmaZamani = DateTime.Now;
                 ogr.DersSecim = true;
                 db.Entry(ogr).State = EntityState.Modified;
-               db.SaveChanges();
-
-                LogData _log = new LogData();
-                _log.CRUD = 3;
-                _log.IPAdress= HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Request.UserHostAddress;
-                _log.islemTarihi = DateTime.Now;
-                _log.OgrenciNo = ogr.OgrenciNo;
-                _log.Yapilanislem = "TekdersKatılımOnay";
-                db.LogDatas.Add(_log);
                 db.SaveChanges();
+                LogKayit.LogData(null, ogr.OgrenciNo, HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Request.UserHostAddress, "TekdersKatılımOnay", 3);
+
 
             }
             return RedirectToAction("Index");
@@ -99,7 +93,7 @@ namespace BasvuruPortal.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Basvuruiptal(TekDersBasvuru model)
         {
 
@@ -108,17 +102,9 @@ namespace BasvuruPortal.Controllers
             {
                 ogr.DersAlmaZamani = null;
                 ogr.DersSecim = false;
-               db.Entry(ogr).State = EntityState.Modified;
+                db.Entry(ogr).State = EntityState.Modified;
                 db.SaveChanges();
-
-                LogData _log = new LogData();
-                _log.CRUD = 3;
-                _log.IPAdress = HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Request.UserHostAddress;
-                _log.islemTarihi = DateTime.Now;
-                _log.OgrenciNo = ogr.OgrenciNo;
-                _log.Yapilanislem = "TekdersKatılımİptali";
-                db.LogDatas.Add(_log);
-                db.SaveChanges();
+                LogKayit.LogData(null, ogr.OgrenciNo, HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Request.UserHostAddress, "TekdersKatılımİptali", 3);
 
             }
             return RedirectToAction("Index");

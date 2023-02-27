@@ -70,7 +70,7 @@
                         <!-- Sidebar Menu -->
 
                         <!-- Add icons to the links using the .nav-icon class
-        with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
                             <a href="@Url.Action("Index","Yonetim")" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -164,10 +164,10 @@
                     {
 
                         <li class="nav-item">
-                            <a href="@Url.Action("obpkullanici","obpbasvuru")" class="nav-link">
+                            <a href="@Url.Action("TekdersSinavi","Ogrisl")" class="nav-link">
                                 <i class="fas fa-exclamation-triangle"></i>
                                 <p>
-                                    OBP Kullanıcı
+                                    Tek Ders Sınavı
 
                                 </p>
                             </a>
@@ -200,7 +200,12 @@
     <div class="content-wrapper">
         @RenderBody()
     </div>
-
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Bilgi İşlem Daire Başkanlığı </b>
+        </div>
+        <strong>Copyright &copy; @DateTime.Now.Year <a href="https://www.kayseri.edu.tr">Kayseri Üniversitesi</a>.</strong>
+    </footer>
     <script src="~/Content/admin/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="~/Content/admin/plugins/jquery-ui/jquery-ui.min.js"></script>

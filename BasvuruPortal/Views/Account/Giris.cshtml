@@ -35,7 +35,15 @@
                     @Html.AntiForgeryToken()
                     @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
                     <div class="input-group mb-3">
-                        <input type="email" name="email"  class="form-control" placeholder="Mail Adresiniz">
+                        <input type="email" name="email" class="form-control" placeholder="Mail Adresiniz">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" name="sicil" class="form-control" placeholder="Sicil Numaranız">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

@@ -1,0 +1,119 @@
+﻿@model BasvuruPortal.Models.TekDersDonemi
+@{
+    ViewBag.Title = "TekDersSinavDonemDuzenle";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+@section cssfile{
+    @{
+        Html.RenderPartial("../PartialViews/formCss");
+    }
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- right column -->
+        <div class="col-md-9">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">Tek Ders Sınavı Dönem Düzenleme</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (@Html.BeginForm("TekDersSinavDonemDuzenle", "Ogrisl", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Tek Ders Yılı</label>
+                                    @Html.TextBoxFor(x => x.TekdersYili, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label> Tek Ders Dönemi No</label>
+                                    @Html.TextBoxFor(x => x.TekdersDonemNo, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label> Tek Ders Sınav Dönemi</label>
+                                    @Html.TextBoxFor(x => x.TekDersDonemAdi, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label> Tek Ders Sınav Tarihi ve Saati</label>
+                                    @Html.TextBoxFor(m => m.SinavTarihi, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Başvuru Başlangıç Tarihi ve Saati</label>
+                                    @Html.TextBoxFor(m => m.BaslangicTarihi, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Başvuru Bitiş Tarihi ve Saati</label>
+                                    @Html.TextBoxFor(m => m.BitisTarihi, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Açık / Kapalı</label>
+                                    @if (Model.Durum == true)
+                                    {
+                                        @Bootstrap.CheckboxforChecked("Durum")
+                                        @*<input type="checkbox" name="secim" checked="checked" data-bootstrap-switch data-off-color="danger" data-on-color="success">*@
+                                    }
+                                    else
+                                    {
+                                        @Bootstrap.CheckboxforUnchecked("Durum")
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="@Url.Action("TekDersDonemler","Ogrisl")" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+
+
+
+
+@section scripts{
+    @{
+        Html.RenderPartial("../PartialViews/formScript");
+        Html.RenderPartial("../PartialView/_adminpanel");
+
+    }
+
+}
+

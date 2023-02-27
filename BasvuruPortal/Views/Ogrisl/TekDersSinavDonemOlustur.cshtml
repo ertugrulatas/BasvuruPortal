@@ -1,0 +1,120 @@
+﻿@model BasvuruPortal.Models.TekDersDonemi
+@{
+    ViewBag.Title = "TekDersSinavDonemOlustur";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+@section cssfile{
+    @{
+        Html.RenderPartial("../PartialViews/formCss");
+    }
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- right column -->
+        <div class="col-md-9">
+            <div class="card card-green">
+                <div class="card-header">
+                    <h3 class="card-title">Tek Ders Sınavı Dönem Oluşturma</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (@Html.BeginForm("TekDersSinavDonemOlustur", "Ogrisl", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Tek Ders Yılı</label>
+                                    @Html.TextBoxFor(x => x.TekdersYili, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label> Tek Ders Dönemi No</label>
+                                    @Html.TextBoxFor(x => x.TekdersDonemNo, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label> Tek Ders Sınav Dönemi</label>
+                                    @Html.TextBoxFor(x => x.TekDersDonemAdi, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label> Tek Ders Sınav Tarihi ve Saati</label>
+                                    @Html.TextBoxFor(m => m.SinavTarihi, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Başvuru Başlangıç Tarihi ve Saati</label>
+                                    @Html.TextBoxFor(m => m.BaslangicTarihi, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Başvuru Bitiş Tarihi ve Saati</label>
+                                    @Html.TextBoxFor(m => m.BitisTarihi, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Açık / Kapalı</label>
+                                    @Bootstrap.CheckboxforUnchecked("Durum")
+                                    @*<input type="checkbox" name="secim" checked="checked" data-bootstrap-switch data-off-color="danger" data-on-color="success">*@
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fa-pull-right"><button type="submit" class="btn btn-primary">Kaydet</button></div>
+                        
+                    }
+                </div>
+                <p><u>Notlar</u> </p>
+                <p>  1 - Tek Ders Dönemi No Güz dönemi için 1, Bahar Dönemi için 2, Yaz dönemi için 3 olarak yazılacaktır</p>
+                <p>  2 - Dönemin sınav tarihi ve sınav saati seçilecek. Öğrencilere tarih ve saat yansıtılacaktır.</p>
+                <p>  3 - Dönemin Öğrenci başvuruların başlangıç tarih ve saatleri de seçilecek. Sistem o seçilen tarih ve saate göre otomatik açılıp, kapanacaktır.</p>
+                <p>  4 - Açık Kapalı alanında dönemi açmadan önce diğer tüm dönemlerin kapatılması gerekmektedir. Aynı anda iki tane açık dönem olmayacaktır</p>
+            </div>
+        </div>
+      
+    </div>
+</div>
+
+<a href="@Url.Action("TekDersDonemler","Ogrisl")" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+
+
+
+
+@section scripts{
+    @{
+        Html.RenderPartial("../PartialViews/formScript");
+        Html.RenderPartial("../PartialView/_adminpanel");
+
+    }
+
+}
+
+
+

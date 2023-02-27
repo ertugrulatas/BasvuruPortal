@@ -160,7 +160,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
                 @using (@Html.BeginForm("TekDersSinavOnay", "TekDersBasvuru", FormMethod.Post))
                 {
-
+                    @Html.AntiForgeryToken()
                     @Html.TextBoxFor(x => x.OgrenciNo, new { @type = "hidden" })
                     @Html.TextBoxFor(x => x.TekDersDonemId, new { @type = "hidden" })
 
@@ -189,7 +189,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
                 @using (@Html.BeginForm("Basvuruiptal", "TekDersBasvuru", FormMethod.Post))
                 {
-
+                    @Html.AntiForgeryToken()
                     @Html.TextBoxFor(x => x.OgrenciNo, new { @type = "hidden" })
                     @Html.TextBoxFor(x => x.TekDersDonemId, new { @type = "hidden" })
 

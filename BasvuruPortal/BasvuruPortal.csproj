@@ -2065,16 +2065,6 @@
     <Content Include="images\kayu-32-2019.ico" />
     <Content Include="images\Kayu-Logo-128x128.png" />
     <Content Include="images\slider\IMG_20200701_121258.jpg" />
-    <Content Include="ObisisVeritabani\obpkayseri.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>obpkayseri.edmx</DependentUpon>
-      <LastGenOutput>obpkayseri.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ObisisVeritabani\obpkayseri.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>obpkayseri.edmx</DependentUpon>
-      <LastGenOutput>obpkayseri.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\js\main.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -2085,7 +2075,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\isgController.cs" />
-    <Compile Include="Controllers\obpbasvuruController.cs" />
+    <Compile Include="Controllers\OgrislController.cs" />
     <Compile Include="Controllers\OnlineBasvuruController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PartialViewsController.cs" />
@@ -2121,25 +2111,8 @@
     <Compile Include="Models\Yarismalar\Yarisma.cs" />
     <Compile Include="Models\Yarismalar\YarismaBasvuru.cs" />
     <Compile Include="Models\Yarismalar\YarismaTur.cs" />
-    <Compile Include="ObisisVeritabani\obpkayseri.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>obpkayseri.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ObisisVeritabani\obpkayseri.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>obpkayseri.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ObisisVeritabani\obpkayseri.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>obpkayseri.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ObisisVeritabani\OBP_KULLANICI.cs">
-      <DependentUpon>obpkayseri.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\LogKayit.cs" />
     <Compile Include="Security\ProjeRolesProvider.cs" />
     <Compile Include="Service\SendEmail.cs" />
     <Compile Include="ViewModels\aracgirisViewModel.cs" />
@@ -2342,13 +2315,7 @@
     <Content Include="Content\admin\dist\js\.eslintrc.json" />
     <Content Include="Content\admin\dist\js\adminlte.js.map" />
     <Content Include="Content\admin\dist\js\adminlte.min.js.map" />
-    <EntityDeploy Include="ObisisVeritabani\obpkayseri.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>obpkayseri.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ObisisVeritabani\obpkayseri.edmx.diagram">
-      <DependentUpon>obpkayseri.edmx</DependentUpon>
-    </Content>
+    <Content Include="App_Code\Bootstrap.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_AnaSayfa.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -2392,7 +2359,6 @@
     <Content Include="Views\PartialView\MesajModal.cshtml" />
     <Content Include="Views\PartialView\OnayModal.cshtml" />
     <Content Include="Views\YarismaBasvuru\Kapali.cshtml" />
-    <Content Include="Views\obpbasvuru\Obpkullanici.cshtml" />
     <Content Include="Views\isg\BildirimFormu.cshtml" />
     <Content Include="Views\isg\Index.cshtml" />
     <Content Include="Views\isg\bildirimler.cshtml" />
@@ -2406,6 +2372,13 @@
     <Content Include="Views\TekDersBasvuru\Index.cshtml" />
     <Content Include="Views\TekDersBasvuru\Giris.cshtml" />
     <Content Include="Views\Shared\_OgrenciLayout.cshtml" />
+    <Content Include="Views\Ogrisl\TekdersSinavi.cshtml" />
+    <Content Include="Views\Ogrisl\Index.cshtml" />
+    <Content Include="Views\Ogrisl\TekDersSinavListesi.cshtml" />
+    <Content Include="Views\Ogrisl\TekDersDonemler.cshtml" />
+    <Content Include="Views\Ogrisl\TekDersSinavDonemDuzenle.cshtml" />
+    <Content Include="Views\Ogrisl\TekDersSinavDonemOlustur.cshtml" />
+    <Content Include="Views\Ogrisl\TekdersOgrenciEkle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

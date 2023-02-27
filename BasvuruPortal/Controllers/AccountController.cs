@@ -20,8 +20,13 @@ namespace BasvuruPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Giris(string email, string pass)
+        public ActionResult Giris(string email, string pass,string sicil)
         {
+            if (sicil == "")
+            {
+                TempData["Mesaj"] = "Sicil Numarası girilmesi zorunludur";
+                return View();
+            }
             string password = hashsifre.encrypt(pass);
             user _user = db.users.Where(x => x.eMail == email && x.pass == password).FirstOrDefault();
             if (_user == null)  // Kullanıcı Bulunmadıysa
@@ -36,13 +41,13 @@ namespace BasvuruPortal.Controllers
                 Session.Clear();
                 Session.Add("giris", "true");
                 Session.Add("username", _user.AdiSoyadi);
-                Session.Add("userID", _user.ID);
+                Session.Add("SicilNo", sicil);
                 Session.Add("mail", _user.eMail);
                 Session.Add("RolID", _user.RolID);
                 Session.Timeout = 60;
                 if (_user.RolID == 3)
                 {
-                    return RedirectToAction("Obpkullanici", "obpbasvuru");
+                    return RedirectToAction("Index", "Ogrisl");
                 }
                 else if (_user.RolID == 4)
                 {
@@ -63,6 +68,7 @@ namespace BasvuruPortal.Controllers
                 TempData["Mesaj"] = "Giriş Yetkiniz Yoktur. Sistem Yöneticiniz ile iletişime geçiniz";
                 return View();
             }
+           
         }
 
         public ActionResult Cikis()

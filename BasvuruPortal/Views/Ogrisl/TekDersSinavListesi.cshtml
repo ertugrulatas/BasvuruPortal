@@ -1,0 +1,111 @@
+﻿@model List<BasvuruPortal.Models.TekDersBasvuru>
+@{
+    ViewBag.Title = "TekDersSinavListesi";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+
+@section cssfile{
+    @{ Html.RenderPartial("../PartialViews/DataTableCss");}
+
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="fa-pull-left">
+                            <h3 class="card-title">Tek Ders Sınav Listesi</h3>
+                        </div>
+                        <div class="fa-pull-right">
+                            <a href="@Url.Action("TekdersOgrenciEkle","Ogrisl")" class="btn btn-primary"><i class="fa fa-plus"></i>Öğrenci Kaydet</a>
+                        </div>
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr align="center">
+                                    <th>Sınav Tarihi</th>
+                                    <th>Öğrenci No</th>
+                                    <th>TCK No</th>
+                                    <th>Fakülte/MYO</th>
+                                    <th>Bölüm</th>
+                                    <th>Adı Soyadı</th>
+                                    <th>Telefonu</th>
+                                    <th>Ders Adı</th>
+                                    <th>Ders Seçim Tarihi</th>
+                                    <th>Ders Seçim Onay</th>
+                                    @*<th>Düzenle</th>*@
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr align="center">
+                                        <td>@item.SinavTarihi.Value.ToString("dd/MM/yyyy") </td>
+                                        <td align="center">@item.OgrenciNo</td>
+                                        <td align="center">@item.OgrenciTCKNo</td>
+                                        <td>@item.FakulteAdi</td>
+                                        <td>@item.BolumAdi</td>
+                                        <td>@item.OgrenciAdi @item.OgrenciSoyadi</td>
+                                        <td>@item.OgrenciTelefon</td>
+                                        <td align="left">@item.DersAdi</td>
+                                        @if (item.DersAlmaZamani != null)
+                                        {
+                                            <td align="center">
+
+                                                @item.DersAlmaZamani.Value.ToString("dd/MM/yyyy HH:mm")
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td align="center">-</td>
+                                        }
+
+                                        @if (item.DersSecim == true)
+                                        {
+                                            <td align="center"><i style="color:green" class="fa fa-check-circle"></i> Onaylı</td>
+                                        }
+                                        else
+                                        {
+                                            <td align="center"></td>
+                                        }
+                                        @*<td align="center"><a href="#"><i style="color:green" class="fas fa-edit"></i></a></td>*@
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenID" />
+    </div>
+</section>
+
+@section modal{
+    @{Html.RenderPartial("../PartialView/MesajModal");}
+
+}
+@section scripts{
+    @{ Html.RenderPartial("../PartialViews/DataTableScript");}
+    @if (TempData["Success"] != null)
+    {
+
+        <script>
+            $('#mesajmodal').modal('show');
+        </script>
+
+    }
+
+}
+
+
+

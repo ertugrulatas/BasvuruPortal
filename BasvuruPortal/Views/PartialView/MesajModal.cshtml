@@ -1,4 +1,4 @@
-﻿<div class="modal fade" id="mesajmodal" tabindex="-1" role="dialog"  aria-hidden="true">
+﻿<div class="modal fade" id="mesajmodal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,8 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                @Html.Raw(TempData["Error"])
-                @Html.Raw(TempData["Success"])
+                <p  style="color:red"> @Html.Raw(TempData["Error"])</p>
+                <p  style="color:blue">  @Html.Raw(TempData["Success"])</p>
+                <p style="color:red">  @Html.Raw(TempData["Mesaj"])</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
